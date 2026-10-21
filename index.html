@@ -1,0 +1,1119 @@
+<title>Inclusive Teaching and Learning</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,400&display=swap">
+<style>
+/* Layout: CEDoW PL module shell (sticky header, sidebar of numbered sections, hero, one section card at a time, footer). Single light theme to match the Maths modules. */
+:root{
+  --cd-navy:#0D2C6B; --cd-aqua:#188296; --cd-gold:#FBAF3F; --cd-silver:#D1D2D4; --cd-charcoal:#4C4C4E; --cd-black:#231F20;
+  --cd-light:#F4F6F9; --cd-white:#FFFFFF; --cd-aqua-soft:#E6F3F5; --cd-gold-soft:#FEF3E0; --cd-navy-soft:#E7ECF6;
+  --cd-header-h:72px;
+  --agc:#A8650A; --env:#2C7A56; --rel:#188296; --rig:#0D2C6B; --equ:#9A2A58;
+  --r1:#E7ECF6; --r1-ink:#0D2C6B; --r2:#E6F3F5; --r2-ink:#11606F; --r3:#FEF3E0; --r3-ink:#8A5200; --r4:#F6E3EC; --r4-ink:#8A2350;
+  --ok:#2C7A56; --bad:#B42335;
+  --font:"Lato",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--cd-light);color:var(--cd-black);font-family:var(--font);-webkit-font-smoothing:antialiased;font-size:15.5px;line-height:1.6}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:70;background:var(--cd-navy)}
+h1,h2,h3,h4{margin:0;line-height:1.25;text-wrap:balance}
+p{margin:0}
+a{color:var(--cd-aqua)}
+button{font:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--cd-gold);outline-offset:2px;border-radius:4px}
+.page{min-height:100%;display:flex;flex-direction:column}
+
+/* Header */
+.cd-header{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--cd-navy);color:var(--cd-white);border-bottom:4px solid var(--cd-gold);box-shadow:0 2px 8px rgba(13,44,107,.18)}
+.cd-header-inner{max-width:80rem;margin:0 auto;padding-block:12px;padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px));min-height:48px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.cd-brand{display:flex;align-items:center;gap:14px;min-width:0}
+.cd-logo{flex:none;width:44px;height:44px;border-radius:10px;background:var(--cd-aqua);display:flex;align-items:center;justify-content:center;box-shadow:inset 0 0 0 1px rgba(255,255,255,.15)}
+.cd-logo svg{width:24px;height:24px}
+.cd-brand-text{min-width:0}
+.cd-org{display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--cd-silver)}
+.cd-title{margin:2px 0 0;font-size:20px;font-weight:900;color:var(--cd-white);letter-spacing:-.01em}
+.cd-header-actions{display:flex;align-items:center;gap:10px;flex:none}
+.cd-pill{display:inline-flex;align-items:center;font-size:12px;font-weight:700;padding:6px 12px;border-radius:999px;background:rgba(24,130,150,.35);border:1px solid rgba(24,130,150,.8);color:var(--cd-white);white-space:nowrap}
+.cd-btn{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;padding:8px 14px;border-radius:8px;background:var(--cd-white);color:var(--cd-navy);border:0;text-decoration:none;white-space:nowrap}
+.cd-btn:hover{background:var(--cd-gold)}
+.cd-btn svg{width:16px;height:16px}
+.cd-menu-btn{display:none}
+
+/* Layout */
+.cd-shell{flex:1 0 auto;width:100%;max-width:80rem;margin:0 auto;padding-block:28px 48px;padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px));display:flex;align-items:flex-start;gap:32px}
+.cd-main{flex:1;min-width:0;display:grid;gap:28px}
+
+/* Sidebar */
+.cd-sidebar{flex:none;width:272px;position:sticky;top:calc(env(safe-area-inset-top,0px) + var(--cd-header-h) + 24px)}
+.cd-side-card{background:var(--cd-white);border:1px solid var(--cd-silver);border-radius:14px;overflow:hidden;box-shadow:0 1px 2px rgba(35,31,32,.05)}
+.cd-side-head{padding:14px 16px;background:var(--cd-light);border-bottom:1px solid var(--cd-silver)}
+.cd-side-label{display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--cd-charcoal)}
+.cd-side-name{display:block;margin-top:2px;font-size:14px;font-weight:900;color:var(--cd-navy)}
+.cd-nav{padding:8px;display:flex;flex-direction:column;gap:2px}
+.cd-nav-link{display:flex;align-items:center;gap:10px;width:100%;text-align:left;padding:9px 10px;border-radius:8px;border:0;border-left:3px solid transparent;background:transparent;font-size:14px;font-weight:700;color:var(--cd-charcoal);line-height:1.3}
+.cd-nav-link:hover{background:var(--cd-light);color:var(--cd-navy)}
+.cd-nav-link.is-active{background:var(--cd-aqua-soft);color:var(--cd-navy);border-left-color:var(--cd-aqua)}
+.cd-nav-num{flex:none;width:24px;height:24px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;background:var(--cd-light);color:var(--cd-navy);border:1px solid var(--cd-silver)}
+.cd-nav-link.is-active .cd-nav-num{background:var(--cd-aqua);border-color:var(--cd-aqua);color:var(--cd-white)}
+.cd-nav-link.is-done .cd-nav-num{background:var(--cd-navy);border-color:var(--cd-navy);color:var(--cd-white)}
+.cd-progress{padding:12px 16px 14px;border-top:1px solid var(--cd-silver)}
+.cd-progress-row{display:flex;justify-content:space-between;font-size:12px;font-weight:700;color:var(--cd-charcoal);margin-bottom:6px}
+.cd-progress-row span:last-child{color:var(--cd-navy)}
+.cd-progress-track{height:8px;border-radius:999px;background:var(--cd-light);border:1px solid var(--cd-silver);overflow:hidden}
+.cd-progress-bar{height:100%;width:0;background:var(--cd-aqua);border-radius:999px;transition:width .3s ease}
+.cd-backdrop{display:none}
+
+/* Hero */
+.cd-hero{background:var(--cd-white);border:1px solid var(--cd-silver);border-radius:16px;padding:32px;border-top:6px solid var(--cd-aqua);box-shadow:0 1px 2px rgba(35,31,32,.05)}
+.cd-eyebrow{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--cd-aqua);background:var(--cd-aqua-soft);padding:4px 10px;border-radius:6px}
+.cd-hero h2{margin:12px 0 0;font-size:30px;font-weight:900;color:var(--cd-navy);letter-spacing:-.01em}
+.cd-hero-text{margin:12px 0 0;max-width:52rem;font-size:16px;line-height:1.65;color:var(--cd-charcoal)}
+.cd-highlights{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:20px}
+.cd-highlight{background:var(--cd-light);border-left:4px solid var(--cd-gold);border-radius:8px;padding:12px 14px}
+.cd-highlight b{display:block;font-size:13px;color:var(--cd-navy)}
+.cd-highlight span{display:block;margin-top:2px;font-size:13px;line-height:1.5;color:var(--cd-charcoal)}
+.cd-facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:24px}
+.cd-fact{background:var(--cd-light);border:1px solid var(--cd-silver);border-radius:12px;padding:14px 16px;text-align:center}
+.cd-fact-label{display:block;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--cd-charcoal)}
+.cd-fact-value{display:block;margin-top:4px;font-size:17px;font-weight:900;color:var(--cd-navy)}
+.cd-fact:nth-child(2) .cd-fact-value{color:var(--cd-aqua)}
+.cd-fact:nth-child(3) .cd-fact-value{color:#B87500}
+
+/* Sections */
+.cd-section{background:var(--cd-white);border:1px solid var(--cd-silver);border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(35,31,32,.05);display:grid;gap:24px;scroll-margin-top:calc(var(--cd-header-h) + 24px)}
+.sec-head{border-bottom:1px solid #E5E7EB;padding-bottom:16px;display:grid;gap:4px}
+.cd-section-title{font-size:24px;font-weight:900;color:var(--cd-navy);letter-spacing:-.01em}
+.sec-sub{color:#4B5563;font-size:14px}
+.big-idea{font-size:18px;line-height:1.55;font-weight:700;color:var(--cd-navy);background:var(--cd-navy-soft);border-radius:12px;padding:16px 18px;display:flex;gap:12px;align-items:flex-start}
+.big-idea svg{flex:none;width:22px;height:22px;margin-top:2px;stroke:var(--cd-aqua)}
+h3.h{font-size:16px;font-weight:900;color:var(--cd-navy);display:flex;align-items:center;gap:8px}
+h3.h svg{width:18px;height:18px;stroke:var(--cd-aqua)}
+.block{display:grid;gap:12px}
+.muted{color:var(--cd-charcoal)}
+.small{font-size:13px}
+ul.clean{margin:0;padding-left:1.15em;display:grid;gap:6px}
+.code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;background:var(--cd-aqua-soft);padding:2px 7px;border-radius:5px;color:var(--cd-navy);font-weight:700;white-space:nowrap}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.box{border:1px solid #E5E7EB;border-radius:12px;padding:18px;background:var(--cd-white)}
+.box.soft{background:var(--cd-light)}
+
+/* Section footer nav */
+.sec-nav{display:flex;justify-content:space-between;gap:10px;border-top:1px solid #E5E7EB;padding-top:18px;flex-wrap:wrap}
+.nav-btn{display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:700;padding:10px 16px;border-radius:8px;border:1px solid var(--cd-silver);background:var(--cd-white);color:var(--cd-navy)}
+.nav-btn:hover{border-color:var(--cd-aqua)}
+.nav-btn.primary{background:var(--cd-navy);border-color:var(--cd-navy);color:var(--cd-white)}
+.nav-btn.primary:hover{background:var(--cd-aqua);border-color:var(--cd-aqua)}
+.nav-btn svg{width:16px;height:16px}
+
+/* Flip cards */
+.flips-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.flips-head span{font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:var(--cd-charcoal)}
+.linkbtn{background:none;border:0;color:var(--cd-aqua);font-weight:700;font-size:13px;padding:2px 4px;text-decoration:underline;text-underline-offset:3px}
+.flips{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
+.flip-card{position:relative;text-align:left;border:1px solid var(--cd-silver);background:var(--cd-white);color:var(--cd-black);border-radius:12px;padding:16px 16px 34px;min-height:124px;display:grid;align-content:start;gap:8px;border-top:4px solid var(--cd-gold);transition:background .2s,border-color .2s}
+.flip-card:hover{border-color:var(--cd-aqua);border-top-color:var(--cd-gold)}
+.flip-card .front{font-weight:900;font-size:16px;line-height:1.3;color:var(--cd-navy)}
+.flip-card .back{display:none;font-size:14px;line-height:1.55}
+.flip-card::after{content:"Tap to reveal";position:absolute;left:16px;bottom:10px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:var(--cd-aqua)}
+.flip-card[aria-pressed="true"]{background:var(--cd-aqua-soft);border-color:var(--cd-aqua);border-top-color:var(--cd-aqua)}
+.flip-card[aria-pressed="true"] .front{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--cd-charcoal)}
+.flip-card[aria-pressed="true"] .back{display:block}
+.flip-card[aria-pressed="true"]::after{content:"Tap to hide"}
+
+details.more{border:1px solid var(--cd-silver);border-radius:12px;background:var(--cd-white)}
+details.more > summary{cursor:pointer;list-style:none;padding:14px 18px;font-weight:900;color:var(--cd-navy);display:flex;justify-content:space-between;align-items:center;gap:12px}
+details.more > summary::-webkit-details-marker{display:none}
+details.more > summary::after{content:"+";font-size:20px;line-height:1;color:var(--cd-aqua)}
+details.more[open] > summary::after{content:"–"}
+details.more > .more-body{padding:0 18px 18px;display:grid;gap:12px}
+
+.fw-quote{border-left:4px solid var(--cd-navy);padding:12px 18px;background:var(--cd-light);border-radius:0 12px 12px 0;display:grid;gap:4px}
+.fw-quote q{font-style:italic;line-height:1.65;quotes:"\201C" "\201D"}
+.fw-quote cite{font-style:normal;font-size:12px;color:var(--cd-charcoal);font-weight:700;letter-spacing:.04em}
+
+.reflect{display:grid;gap:8px;background:var(--cd-gold-soft);border-radius:12px;padding:18px;border:1px solid #F5D9A8}
+.reflect .k{font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-weight:900;color:#8A5200;display:flex;align-items:center;gap:6px}
+.reflect .k svg{width:16px;height:16px;stroke:#8A5200}
+.reflect label{font-weight:700}
+textarea,input[type=text],select{width:100%;font:inherit;font-size:14px;color:var(--cd-black);background:var(--cd-white);border:1px solid var(--cd-silver);border-radius:8px;padding:9px 11px}
+textarea{min-height:76px;resize:vertical}
+textarea:focus,input:focus,select:focus{outline:2px solid var(--cd-aqua);outline-offset:0;border-color:var(--cd-aqua)}
+.saved{font-size:12px;color:var(--cd-charcoal);min-height:1em}
+
+/* OCI */
+.oci{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;counter-reset:oci}
+.oci div{background:var(--cd-light);border:1px solid var(--cd-silver);border-radius:12px;padding:12px;display:grid;gap:4px;align-content:start;counter-increment:oci}
+.oci div::before{content:counter(oci);width:24px;height:24px;border-radius:50%;background:var(--cd-gold);color:var(--cd-black);font-weight:900;display:grid;place-items:center;font-size:12px}
+.oci b{font-size:13px;color:var(--cd-navy)}
+.oci p{font-size:13px;color:var(--cd-charcoal)}
+.hits{display:flex;flex-wrap:wrap;gap:6px}
+.hit{font-size:12px;font-weight:700;background:var(--cd-aqua-soft);color:#11606F;padding:3px 10px;border-radius:999px}
+
+/* Syllabus to student voice */
+.s2s{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid var(--cd-silver);border-radius:12px;overflow:hidden}
+.s2s-step{padding:14px 16px;display:grid;gap:6px;align-content:start}
+.s2s-step + .s2s-step{border-left:1px solid var(--cd-silver)}
+.s2s-step .k{font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:900;color:var(--cd-charcoal)}
+.s2s-step p{font-size:14px}
+.s2s-n{width:24px;height:24px;border-radius:50%;background:var(--cd-navy);color:var(--cd-white);font-weight:900;display:grid;place-items:center;font-size:12px}
+.s2s-last{background:var(--cd-aqua-soft)}
+.s2s-last .k{color:#11606F}
+.s2s-li{font-size:16px!important;font-weight:700;color:var(--cd-navy)}
+
+.grain{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.grain > div{border:2px solid #F3C4CB;background:#FDF4F5;border-radius:12px;padding:14px 16px;display:grid;gap:6px;align-content:start}
+.grain .good{border-color:var(--cd-aqua);background:var(--cd-aqua-soft)}
+.grain .k{font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:900;color:var(--bad);display:flex;gap:6px;align-items:center}
+.grain .good .k{color:#11606F}
+.grain .k svg{width:16px;height:16px}
+.grain p{font-weight:700}
+.grain small{font-size:13px;color:var(--cd-charcoal)}
+
+.sorter{display:grid;gap:10px}
+.sort-item{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 16px;align-items:center;background:var(--cd-light);border:1px solid #E5E7EB;border-radius:10px;padding:12px 14px}
+.sort-item .q{font-weight:700}
+.sort-item .opts{display:flex;gap:6px;flex-wrap:wrap}
+.opt{border:1px solid var(--cd-silver);background:var(--cd-white);color:var(--cd-black);border-radius:999px;padding:5px 12px;font-size:12px;font-weight:700}
+.opt.right{background:var(--ok);border-color:var(--ok);color:#fff}
+.opt.wrong{background:var(--bad);border-color:var(--bad);color:#fff}
+.sort-item .fb{grid-column:1/-1;font-size:13px;color:var(--cd-charcoal)}
+
+/* Ladder */
+.ladder{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;align-items:end}
+.rung{border-radius:12px;padding:14px;display:grid;gap:6px;align-content:start}
+.rung .rn{display:flex;align-items:center;gap:8px;font-weight:900}
+.rung .rn i{font-style:normal;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-size:12px;background:var(--cd-white)}
+.rung p{color:var(--cd-black);font-size:13.5px}
+.rung .verbs{font-size:12px;color:var(--cd-charcoal);font-style:italic}
+.rung.k1{background:var(--r1);color:var(--r1-ink);min-height:140px}
+.rung.k2{background:var(--r2);color:var(--r2-ink);min-height:170px}
+.rung.k3{background:var(--r3);color:var(--r3-ink);min-height:200px}
+.rung.k4{background:var(--r4);color:var(--r4-ink);min-height:230px}
+.band{display:grid;grid-template-columns:3fr 1fr;gap:10px;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--cd-charcoal);margin-top:8px}
+.band span{border-top:2px solid var(--cd-silver);padding-top:6px}
+
+/* Board display */
+.display{border:1px solid var(--cd-silver);border-radius:12px;overflow:hidden;background:var(--cd-white)}
+.display table{width:100%;border-collapse:collapse;font-size:14px}
+.display th{width:30%;text-align:left;vertical-align:top;color:var(--cd-navy);font-weight:900;padding:12px 14px;border-bottom:1px solid var(--cd-silver);border-right:1px solid var(--cd-silver)}
+.display td{padding:12px 14px;border-bottom:1px solid var(--cd-silver);vertical-align:top}
+.display tr:first-child th{border-bottom:3px solid #C8202F}
+.display tr:last-child th,.display tr:last-child td{border-bottom:0}
+.display ol{margin:0;padding:0;list-style:none;display:grid;gap:8px}
+.display ol li{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px;align-items:baseline}
+.tag{display:inline-block;font-size:11px;font-weight:900;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:999px;white-space:nowrap}
+.tag.k1{background:var(--r1);color:var(--r1-ink)} .tag.k2{background:var(--r2);color:var(--r2-ink)} .tag.k3{background:var(--r3);color:var(--r3-ink)} .tag.k4{background:var(--r4);color:var(--r4-ink)}
+.table-scroll{overflow-x:auto}
+
+/* Lesson flow etc */
+.flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.flow > div{background:var(--cd-light);border:1px solid #E5E7EB;border-top:4px solid var(--cd-aqua);border-radius:12px;padding:14px;display:grid;gap:6px;align-content:start}
+.flow .k{font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:900;color:var(--cd-aqua)}
+.flow b{color:var(--cd-navy)}
+.flow ul{margin:0;padding-left:1.1em;display:grid;gap:4px;font-size:13px;color:var(--cd-charcoal)}
+.fbr{display:grid;gap:8px}
+.fbr > div{display:grid;grid-template-columns:130px minmax(0,1fr);gap:10px;font-size:14px;padding:8px 10px;background:var(--cd-light);border-radius:8px}
+.fbr b{color:var(--cd-navy)}
+table.voice{width:100%;border-collapse:collapse;font-size:13px;min-width:620px}
+table.voice th,table.voice td{border:1px solid var(--cd-silver);padding:8px 10px;text-align:left;vertical-align:top}
+table.voice thead th{background:var(--cd-navy);color:var(--cd-white)}
+table.voice tbody th{width:22%;color:var(--cd-navy)}
+.tally{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.tally .tq{display:grid;gap:8px}
+.tally .row{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.tally label{display:inline-flex;gap:4px;align-items:center;font-size:12px;color:var(--cd-charcoal)}
+.tally select{width:auto;padding:5px 8px;font-size:13px}
+.tally .avg{font-size:13px;color:var(--cd-charcoal)}
+.tally .avg strong{color:var(--cd-navy);font-size:16px;font-variant-numeric:tabular-nums}
+
+.room{width:100%;height:auto;display:block;max-width:540px}
+.ba{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.ba-col{border:2px solid #F3C4CB;background:#FDF4F5;border-radius:12px;padding:16px;display:grid;gap:10px;align-content:start}
+.ba-col.after{border-color:var(--cd-aqua);background:var(--cd-aqua-soft)}
+.ba-col h4{font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-weight:900;color:var(--bad);display:flex;gap:6px;align-items:center}
+.ba-col.after h4{color:var(--cd-navy)}
+.ba-col h4 svg{width:18px;height:18px}
+.ba-col p{background:var(--cd-white);border:1px solid #E5E7EB;border-radius:8px;padding:9px 11px;font-size:14px}
+
+/* Elements */
+.el-tabs{display:flex;flex-wrap:wrap;gap:8px}
+.el-tab{border:2px solid var(--c);background:var(--cd-white);color:var(--c);font-weight:900;padding:7px 16px;border-radius:999px;font-size:14px}
+.el-tab[aria-selected="true"]{background:var(--c);color:var(--cd-white)}
+.el-body{border:1px solid var(--cd-silver);border-top:5px solid var(--c);border-radius:12px;padding:20px;display:grid;gap:16px}
+.el-def{font-size:17px;font-weight:700;color:var(--cd-navy);line-height:1.55}
+.el-def small{display:block;font-weight:400;font-size:14px;color:var(--cd-charcoal);margin-top:6px;line-height:1.6}
+.el-src{font-size:12px;color:var(--cd-charcoal);font-weight:700}
+.el-cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.el-cols h4{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--c);margin-bottom:6px}
+.el-cols ul{margin:0;padding-left:1.1em;display:grid;gap:5px;font-size:14px}
+
+/* Examples */
+.filters{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center}
+.filters .grp{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.filters .lab{font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:900;color:var(--cd-charcoal);margin-right:4px}
+.fchip{border:1px solid var(--cd-silver);background:var(--cd-white);color:var(--cd-black);border-radius:999px;padding:6px 13px;font-size:13px;font-weight:700}
+.fchip[aria-pressed="true"]{background:var(--cd-navy);border-color:var(--cd-navy);color:var(--cd-white)}
+.ex-list{display:grid;gap:10px}
+details.ex{background:var(--cd-white);border:1px solid var(--cd-silver);border-radius:12px}
+details.ex[open]{border-color:var(--cd-aqua)}
+details.ex > summary{list-style:none;cursor:pointer;padding:12px 14px;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:14px;align-items:center}
+details.ex > summary::-webkit-details-marker{display:none}
+.stage-badge{width:50px;height:50px;border-radius:10px;background:var(--cd-navy);color:var(--cd-white);display:grid;place-items:center;font-weight:900;font-size:14px;line-height:1;text-align:center}
+.stage-badge small{display:block;font-size:9.5px;font-weight:700;letter-spacing:.04em;opacity:.85;margin-top:3px}
+.ex-title{display:grid;gap:2px;min-width:0}
+.ex-title b{font-size:15.5px;color:var(--cd-navy)}
+.ex-title span{font-size:13px;color:var(--cd-charcoal)}
+.chev{width:28px;height:28px;border-radius:50%;border:1px solid var(--cd-silver);display:grid;place-items:center;transition:transform .2s;color:var(--cd-charcoal)}
+details[open] .chev{transform:rotate(180deg)}
+.ex-body{padding:0 14px 16px;display:grid;gap:14px}
+.ex-tabs{display:flex;gap:4px;flex-wrap:wrap;border-bottom:1px solid #E5E7EB}
+.ex-tab{border:0;border-bottom:3px solid transparent;background:none;color:var(--cd-charcoal);padding:8px 10px;font-size:13px;font-weight:700}
+.ex-tab[aria-selected="true"]{border-bottom-color:var(--cd-aqua);color:var(--cd-navy)}
+.ex-pane{display:grid;gap:12px}
+.task-big{font-size:15px;line-height:1.65;background:var(--cd-light);border-left:4px solid var(--cd-gold);padding:12px 14px;border-radius:0 10px 10px 0;font-style:italic}
+.prompts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.prompts div{border:1px solid #E5E7EB;border-radius:10px;padding:11px 13px;font-size:13.5px;display:grid;gap:4px;align-content:start}
+.prompts b{font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+.prompts .en b{color:var(--env)} .prompts .xt b{color:var(--agc)} .prompts .cf b{color:var(--cd-navy)}
+.lens{display:grid;gap:8px}
+.lens-row{display:grid;grid-template-columns:110px minmax(0,1fr);gap:12px;font-size:14px;align-items:baseline}
+.lens-row b{color:var(--c);font-size:12px;letter-spacing:.06em;text-transform:uppercase}
+.note{font-size:13px;color:var(--cd-charcoal)}
+
+/* Planner */
+.planner{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;align-items:start}
+.form{display:grid;gap:11px;background:var(--cd-light);border:1px solid #E5E7EB;border-radius:12px;padding:18px}
+.form label{display:grid;gap:4px;font-size:13px;font-weight:700;color:var(--cd-navy)}
+.form .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.form .crit-row{grid-template-columns:170px minmax(0,1fr)}
+.form .group-h{font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:900;color:var(--cd-aqua);margin-top:6px}
+.checks{display:grid;gap:6px;font-size:13.5px}
+.checks div{display:flex;gap:8px;align-items:flex-start}
+.checks .ic{width:20px;height:20px;border-radius:50%;flex:none;display:grid;place-items:center;font-size:11px;font-weight:900;margin-top:1px;background:var(--cd-silver);color:var(--cd-charcoal)}
+.checks .ok .ic{background:var(--ok);color:#fff}
+.out-actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.sticky-out{position:sticky;top:calc(env(safe-area-inset-top,0px) + var(--cd-header-h) + 24px);display:grid;gap:12px}
+.rehearse{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.rehearse ol,.rehearse ul{margin:0;padding-left:1.2em;display:grid;gap:5px;font-size:14px;color:var(--cd-charcoal)}
+
+/* Quiz */
+.q{border:1px solid #E5E7EB;border-radius:10px;padding:18px;display:grid;gap:10px}
+.q .qn{font-size:11px;font-weight:700;color:#9CA3AF;text-transform:uppercase;letter-spacing:.06em}
+.q .qt{font-size:14.5px;font-weight:700}
+.q label{display:flex;gap:8px;align-items:flex-start;padding:8px;border-radius:8px;font-size:13.5px;cursor:pointer}
+.q label:hover{background:var(--cd-light)}
+.q label input{margin-top:3px}
+.q.correct{border-color:var(--ok);background:#F0F8F4}
+.q.incorrect{border-color:var(--bad);background:#FDF4F5}
+.q .qfb{font-size:13px}
+.q.correct .qfb{color:var(--ok)} .q.incorrect .qfb{color:var(--bad)}
+.result{border-radius:12px;padding:16px 18px;font-weight:700;display:flex;gap:10px;align-items:center}
+.result.pass{background:#F0F8F4;color:var(--ok);border:1px solid var(--ok)}
+.result.fail{background:var(--cd-gold-soft);color:#8A5200;border:1px solid #F5D9A8}
+.result svg{width:22px;height:22px;flex:none}
+
+.sources{font-size:12.5px;color:var(--cd-charcoal);display:grid;gap:6px;border-top:1px solid #E5E7EB;padding-top:16px}
+
+/* Footer */
+.cd-footer{background:var(--cd-navy);color:var(--cd-silver);border-top:4px solid var(--cd-gold)}
+.cd-footer-inner{max-width:80rem;margin:0 auto;padding-block:20px;padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px));display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 24px;font-size:13px;line-height:1.5}
+.cd-footer strong{color:var(--cd-white)}
+
+@media (max-width:1023px){
+  .cd-pill{display:none}
+  .cd-menu-btn{display:inline-flex}
+  .cd-shell{display:block;padding-block:20px 40px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+  .cd-sidebar{position:fixed;z-index:60;top:0;bottom:0;left:0;width:min(300px,86vw);transform:translateX(-105%);transition:transform .2s ease;padding:calc(16px + env(safe-area-inset-top,0px)) 16px calc(16px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));background:var(--cd-light);overflow-y:auto}
+  body.cd-nav-open .cd-sidebar{transform:none;box-shadow:8px 0 24px rgba(0,0,0,.2)}
+  body.cd-nav-open .cd-backdrop{display:block;position:fixed;inset:0;z-index:55;background:rgba(35,31,32,.45)}
+  .planner{grid-template-columns:minmax(0,1fr)}
+  .sticky-out{position:static}
+  .oci,.flow{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .ladder{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .rung{min-height:0!important}
+  .band{display:none}
+  .prompts{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:640px){
+  :root{--cd-header-h:64px}
+  .cd-header-inner{padding-block:10px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+  .cd-logo{width:38px;height:38px}
+  .cd-org{display:none}
+  .cd-title{font-size:16px}
+  .cd-btn .cd-btn-text{display:none}
+  .cd-btn{padding:8px 10px}
+  .cd-hero,.cd-section{padding:20px;border-radius:12px}
+  .cd-hero h2{font-size:24px}
+  .cd-facts,.grid2,.s2s,.grain,.ba,.tally,.rehearse,.el-cols,.oci,.flow,.ladder{grid-template-columns:minmax(0,1fr)}
+  .s2s-step + .s2s-step{border-left:0;border-top:1px solid var(--cd-silver)}
+  .cd-section-title{font-size:20px}
+  .big-idea{font-size:16px}
+  .sort-item{grid-template-columns:minmax(0,1fr)}
+  .lens-row{grid-template-columns:minmax(0,1fr);gap:0}
+  .fbr > div{grid-template-columns:minmax(0,1fr);gap:2px}
+  .form .row,.form .crit-row{grid-template-columns:minmax(0,1fr)}
+  .display th{width:36%}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+
+<div class="page">
+<header class="cd-header">
+  <div class="cd-header-inner">
+    <div class="cd-brand">
+      <span class="cd-logo"><svg viewBox="0 0 24 24" fill="none" stroke="#FBAF3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 2.5 9 2.5 12 0v-5"/></svg></span>
+      <span class="cd-brand-text">
+        <span class="cd-org">Catholic Education Diocese of Wollongong &middot; Teaching and Learning K&ndash;6</span>
+        <h1 class="cd-title">Module 1: Inclusive Teaching and Learning</h1>
+      </span>
+    </div>
+    <div class="cd-header-actions">
+      <span class="cd-pill">NSW K&ndash;6 Syllabuses</span>
+      <button type="button" class="cd-btn cd-menu-btn" id="cdNavToggle" aria-controls="cdSidebar" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg><span class="cd-btn-text">Sections</span></button>
+    </div>
+  </div>
+</header>
+<div class="cd-backdrop" id="cdBackdrop"></div>
+
+<div class="cd-shell">
+  <aside class="cd-sidebar" id="cdSidebar" aria-label="Module sections">
+    <div class="cd-side-card">
+      <div class="cd-side-head">
+        <span class="cd-side-label">Module sections</span>
+        <span class="cd-side-name">Module 1: Inclusive Teaching and Learning</span>
+      </div>
+      <nav class="cd-nav" id="cdNav"></nav>
+      <div class="cd-progress">
+        <div class="cd-progress-row"><span>Your progress</span><span id="progPct">0%</span></div>
+        <div class="cd-progress-track"><div class="cd-progress-bar" id="progBar"></div></div>
+      </div>
+    </div>
+  </aside>
+
+  <main class="cd-main">
+    <section class="cd-hero" aria-label="Module overview">
+      <span class="cd-eyebrow">Module 1 &middot; Self-paced professional learning</span>
+      <h2>Clear Learning Goals That Bring Every Learner In</h2>
+      <p class="cd-hero-text">Write learning intentions from the syllabus in student-friendly language, build a success criteria ladder that moves from a low floor start to transfer, and design low floor, high ceiling tasks so every student can start and none are held back.</p>
+      <div class="cd-highlights">
+        <div class="cd-highlight"><b>One learning intention</b><span>The same destination for the whole class.</span></div>
+        <div class="cd-highlight"><b>Three to five success criteria</b><span>From a low floor start to transfer.</span></div>
+        <div class="cd-highlight"><b>One rich task</b><span>A low floor everyone can start; a high ceiling no one outgrows.</span></div>
+      </div>
+      <div class="cd-facts">
+        <div class="cd-fact"><span class="cd-fact-label">Syllabus</span><span class="cd-fact-value">NSW K&ndash;6 KLAs</span></div>
+        <div class="cd-fact"><span class="cd-fact-label">Stages</span><span class="cd-fact-value">Early Stage 1 &ndash; Stage 3</span></div>
+        <div class="cd-fact"><span class="cd-fact-label">Framework</span><span class="cd-fact-value">Essential Elements</span></div>
+      </div>
+    </section>
+
+    <!-- 1 -->
+    <section class="cd-section" id="s1" data-title="Getting Started">
+      <div class="sec-head"><h2 class="cd-section-title">Section 1: Getting Started</h2><p class="sec-sub">Where this module sits in our Framework and in Ongoing Cyclic Inquiry.</p></div>
+      <div class="fw-quote">
+        <q>Beliefs and practices that support our mission to create vibrant Catholic school communities where every student finds meaning and purpose in their life by experiencing continual growth in faith and improvement in learning</q>
+        <cite>FAITH, LEARNING &amp; WELLBEING FRAMEWORK, VERSION 1.0 (2025)</cite>
+      </div>
+      <div class="flips-head"><span>Key ideas</span><button class="linkbtn" type="button" data-revealall>Reveal all</button></div>
+      <div class="flips">
+        <button class="flip-card" type="button" aria-pressed="false"><span class="front">What will I be able to do?</span><span class="back">Write a learning intention from the syllabus in student-friendly language, write a ladder of three to five success criteria that moves from a low floor start to transfer, and open up a task so every student can start.</span></button>
+        <button class="flip-card" type="button" aria-pressed="false"><span class="front">How is it organised?</span><span class="back">Nine short sections. Each opens with one big idea and a few cards like these, with detail in "Read more" panels. Section 9 is a short checkpoint.</span></button>
+        <button class="flip-card" type="button" aria-pressed="false"><span class="front">How does it connect to our Framework?</span><span class="back">Each section links to the Essential Elements and Ongoing Cyclic Inquiry, and uses several High Impact Strategies.</span></button>
+      </div>
+      <div class="block">
+        <h3 class="h"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg>Ongoing Cyclic Inquiry: where this module sits</h3>
+        <div class="oci">
+          <div><b>Identify current context</b><p>Where are my students starting from?</p></div>
+          <div><b>Prioritise &amp; set goals</b><p>Learning intention and success criteria from the syllabus.</p></div>
+          <div><b>Plan &amp; implement</b><p>A low floor, high ceiling task.</p></div>
+          <div><b>Monitor &amp; collect evidence</b><p>Success criteria show what to look and listen for.</p></div>
+          <div><b>Reflect &amp; evaluate</b><p>Who reached which criteria? What next?</p></div>
+        </div>
+      </div>
+      <div class="block">
+        <h3 class="h"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>High Impact Strategies in this module</h3>
+        <div class="hits"><span class="hit">Setting goals</span><span class="hit">Explicit teaching</span><span class="hit">Questioning</span><span class="hit">Feedback</span><span class="hit">Metacognitive strategies</span><span class="hit">Differentiated teaching</span><span class="hit">Fostering student self-efficacy</span></div>
+      </div>
+      <div class="reflect" data-key="r-intro"><span class="k"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>Reflect</span><label for="r-intro">Think of a recent lesson. Could every student start the task? Did anyone finish early with nowhere to go?</label><textarea id="r-intro"></textarea><span class="saved"></span></div>
+    </section>
+
+    <!-- 2 -->
+    <section class="cd-section" id="s2" data-title="Learning Intentions" hidden>
+      <div class="sec-head"><h2 class="cd-section-title">Section 2: Learning Intentions</h2><p class="sec-sub">From the syllabus to students' own words.</p></div>
+      <p class="big-idea"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>A learning intention names what students will learn. It starts in the syllabus and is written in words students understand.</p>
+      <div class="flips-head"><span>Key ideas</span><button class="linkbtn" type="button" data-revealall>Reveal all</button></div>
+      <div class="flips">
+        <button class="flip-card" type="button" aria-pressed="false"><span class="front">Where does it come from?</span><span class="back">A syllabus outcome and the specific content point you are teaching in this lesson.</span></button>
+        <button class="flip-card" type="button" aria-pressed="false"><span class="front">What does it name?</span><span class="back">The knowledge, understanding or skill students will learn. Not the activity, and not the topic.</span></button>
+        <button class="flip-card" type="button" aria-pressed="false"><span class="front">How is it written?</span><span class="back">"We are learning to…" with one action verb, in plain words. New subject terms are taught, not avoided.</span></button>
+        <button class="flip-card" type="button" aria-pressed="false"><span class="front">Who is it for?</span><span class="back">Every student. The intention stays the same for the whole class. Support changes; the destination doesn't.</span></button>
+      </div>
+      <div class="block">
+        <h3 class="h"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>From syllabus to student voice</h3>
+        <div class="s2s">
+          <div class="s2s-step"><span class="s2s-n">1</span><span class="k">Outcome</span><p><span class="code">MA2-MR-01</span> represents and uses the structure of multiplicative relations to 10 × 10 to solve problems</p></div>
+          <div class="s2s-step"><span class="s2s-n">2</span><span class="k">Content</span><p>Use arrays to establish multiplication facts. Use number properties to find related multiplication facts.</p></div>
+          <div class="s2s-step s2s-last"><span class="s2s-n">3</span><span class="k">Student-friendly learning intention</span><p class="s2s-li">We are learning to use arrays to find all the ways to multiply to make a number.</p></div>
+        </div>
+      </div>
+      <div class="block">
+        <h3 class="h"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>Finding the right size</h3>
+        <div class="grain">
+          <div><span class="k"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6M9 9l6 6"/></svg>Too broad</span><p>We are learning about area.</p><small>Names the topic, not what students will do.</small></div>
+          <div><span class="k"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6M9 9l6 6"/></svg>Too task-specific</span><p>We are learning to design a garden bed.</p><small>Students remember the garden, not the maths.</small></div>
+          <div class="good"><span class="k"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>Just right</span><p>We are learning to compare the areas of rectangles that have the same perimeter.</p><small>Specific and transferable. <span class="code">MA3-2DS-02</span></small></div>
+        </div>
+      </div>
+      <div class="block">
+        <h3 class="h"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>Try it: learning, activity or context?</h3>
+        <div class="sorter" id="sorter"></div>
+      </div>
+      <details class="more"><summary>Read more: making it student friendly</summary><div class="more-body"><ul class="clean">
+        <li>Begin with "We are learning to…" and one action verb students can picture: <i>identify, show, explain, compare, create</i>.</li>
+        <li>Keep one idea per intention. Split a long content point across lessons.</li>
+        <li>Swap syllabus phrasing for everyday words, but keep the key subject term (<i>array, paragraph, habitat</i>) and teach it.</li>
+        <li>Test it: can a student say it back in their own words?</li>
+        <li><b>K–2:</b> short enough to say in one breath, paired with a picture or symbol, said aloud and echoed with a partner.</li>
+      </ul></div></details>
+      <details class="more"><summary>Read more: what a learning intention isn't</summary><div class="more-body"><ul class="clean">
+        <li>Vague: "Today we are learning about fractions."</li>
+        <li>Written for teachers: "Students will understand the main idea and supporting details of a text."</li>
+        <li>Copied from the syllabus without breaking it down or unpacking the terms.</li>
+        <li>Copied into books word for word. Copying is not understanding.</li>
+        <li>Displayed at the start and never mentioned again.</li>
+        <li>A different intention for individual students or fixed groups.</li>
+      </ul></div></details>
+      <div class="reflect" data-key="r-1"><span class="k"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>Reflect</span><label for="r-1">Take one learning intention from your current program. Trace it back to its outcome and content point, then rewrite it in student-friendly language.</label><textarea id="r-1"></textarea><span class="saved"></span></div>
+    </section>
+
+    <!-- 3 -->
+    <section class="cd-section" id="s3" data-title="Success Criteria Ladder" hidden>
+      <div class="sec-head"><h2 class="cd-section-title">Section 3: The Success Criteria Ladder</h2><p class="sec-sub">Three to five criteria that move from a low floor start to transfer.</p></div>
+      <p class="big-idea"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20h4v-4h4v-4h4V8h4V4"/></svg>Three to five success criteria that give every student a starting point and a way to go further. Every student works up the same ladder.</p>
+      <div class="flips-head"><span>Key ideas</span><button class="linkbtn" type="button" data-revealall>Reveal all</button></div>
+      <div class="flips">
+        <button class="flip-card" type="button" aria-pressed="false"><span class="front">How many?</span><span class="back">Three to five. The number matters less than covering the four opportunities on the ladder.</span></button>
+        <button class="flip-card" type="button" aria-pressed="false"><span class="front">What must the ladder include?</span><span class="back">A low floor starting point, a chance to demonstrate knowledge and skills, a chance to apply them in a familiar situation, and a chance to transfer them to an unfamiliar one.</span></button>
+        <button class="flip-card" type="button" aria-pressed="false"><span class="front">Where is application?</span><span class="back">Twice. First in a familiar situation, like the one modelled. Then in an unfamiliar one, where students transfer or generalise.</span></button>
+        <button class="flip-card" type="button" aria-pressed="false"><span class="front">Is it the same for everyone?</span><span class="back">Yes. Every student works toward the same criteria. Scaffolds change: materials, prompts, sentence stems, modelling.</span></button>
+      </div>
+      <div class="block">
+        <div class="ladder">
+          <div class="rung k1"><span class="rn"><i>1</i>Start</span><p>A low floor starting point every student can reach, with support if needed.</p><span class="verbs">name, identify, tell, build, sort</span></div>
+          <div class="rung k2"><span class="rn"><i>2</i>Demonstrate</span><p>Show the knowledge and skills being learned.</p><span class="verbs">show, explain, measure, draw, write</span></div>
+          <div class="rung k3"><span class="rn"><i>3</i>Apply</span><p>Use the knowledge and skills in a familiar situation, like the one modelled.</p><span class="verbs">use, solve, choose, plan, create</span></div>
+          <div class="rung k4"><span class="rn"><i>4</i>Transfer</span><p>Apply them in an unfamiliar situation: transfer or generalise.</p><span class="verbs">adapt, generalise, predict, justify</span></div>
+        </div>
+        <div class="band"><span>Low floor: everyone can start</span><span>High ceiling: transfer</span></div>
+        <div class="box soft small" style="display:grid;gap:6px"><b style="color:var(--cd-navy)">Three to five criteria</b>
+          <span><b>Three:</b> combine the starting point and demonstrating into one criterion, for example in a short or early-years lesson.</span>
+          <span><b>Five:</b> add a second Demonstrate or Apply criterion when the skill has distinct steps.</span>
+          <span>Whatever the number, all four opportunities are there.</span></div>
+      </div>
+      <div class="fw-quote"><q>Value equally knowledge, skills, mastery, and application of learning.</q><cite>FAITH, LEARNING &amp; WELLBEING FRAMEWORK · RIGOUR</cite></div>
+      <div class="block">
+        <h3 class="h"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M8 22h8M12 18v4"/></svg>On the board</h3>
+        <div class="display table-scroll"><table>
+          <tr><th>Global learning intention</th><td>To represent and interpret data</td></tr>
+          <tr><th>We are learning to</th><td>Represent data on a column graph</td></tr>
+          <tr><th>To be successful, we will</th><td><ol>
+            <li><span class="tag k1">Start</span><span>Identify the parts of a column graph: title, axes, labels and scale</span></li>
+            <li><span class="tag k2">Demonstrate</span><span>Draw a column graph of our class data using an even scale</span></li>
+            <li><span class="tag k3">Apply</span><span>Choose a suitable scale and graph a new set of class data</span></li>
+            <li><span class="tag k4">Transfer</span><span>Use a graph to answer a question about data from somewhere new, like a news report, and explain my thinking</span></li>
+          </ol></td></tr>
+        </table></div>
+      </div>
+      <details class="more"><summary>Read more: writing criteria well</summary><div class="more-body"><ul class="clean">
+        <li><b>Write the Apply criterion first.</b> What does using this learning in a familiar situation look like at stage level? Then work down to the start and up to transfer.</li><li><b>Make the start a genuine low floor.</b> Every student should be able to reach it, with support if needed. State it as what students can do, not what is missing.</li><li><b>Make transfer genuinely new.</b> A different context, audience, number or problem, not more of the same.</li>
+        <li><b>Describe what students do, say or make.</b> Leave out words like <i>good, neat, clear, detailed</i>.</li>
+        <li><b>Decontextualise.</b> "I can include arguments for and against" transfers. "I can explain why uniforms are popular" doesn't.</li>
+        <li><b>Change the thinking, not the quantity.</b> "3 sentences / 5 sentences / 8 sentences" is not a ladder.</li>
+        <li><b>Name the language demands</b> of the task, so EAL/D learners know what language to use.</li>
+        <li><b>Students working well above or below stage level</b>, including Life Skills, work from the matching syllabus outcomes, on the same or a similar task where possible.</li>
+      </ul></div></details>
+      <div class="reflect" data-key="r-2"><span class="k"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>Reflect</span><label for="r-2">For the learning intention you rewrote in Section 2, draft three to five criteria that include a starting point, demonstrating, applying in a familiar situation and transferring to an unfamiliar one.</label><textarea id="r-2"></textarea><span class="saved"></span></div>
+    </section>
+
+    <!-- 4 -->
+    <section class="cd-section" id="s4" data-title="Sharing &amp; Using Them" hidden>
+      <div class="sec-head"><h2 class="cd-section-title">Section 4: Sharing and Using Them in the Lesson</h2><p class="sec-sub">Making learning intentions and success criteria work from launch to close.</p></div>
+      <p class="big-idea"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Share them early. Check students understand them. Come back to them all lesson.</p>
+      <div class="flips-head"><span>Key ideas</span><button class="linkbtn" type="button" data-revealall>Reveal all</button></div>
+      <div class="flips">
+        <button class="flip-card" type="button" aria-pressed="false"><span class="front">Why share early?</span><span class="back">In a well-known study, people told a passage was about doing laundry <i>before</i> hearing it recalled about twice as much as those told afterwards (Bransford &amp; Johnson, 1972). Knowing the goal gives new learning somewhere to attach.</span></button>
+        <button class="flip-card" type="button" aria-pressed="false"><span class="front">How do I know they understand it?</span><span class="back">Ask them to say it in their own words to a partner. Teach any new terms. Check with a quick question before they start.</span></button>
+        <button class="flip-card" type="button" aria-pressed="false"><span class="front">When do I come back to it?</span><span class="back">In questions, in feedback, before removing scaffolds or starting independent work, and in the lesson summary.</span></button>
+        <button class="flip-card" type="button" aria-pressed="false"><span class="front">What about open tasks?</span><span class="back">You can let students explore first. Frame the context and question, then name the intention before they work independently.</span></button>
+      </div>
+      <div class="block">
+        <h3 class="h"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>Across the lesson</h3>
+        <div class="flow">
+          <div><span class="k">Before</span><b>Plan</b><ul><li>Intention and criteria from the syllabus</li><li>A strong example and a non-example</li><li>Vocabulary to teach and one check for understanding</li></ul></div>
+          <div><span class="k">Launch</span><b>Share and clarify</b><ul><li>Explain in student-friendly words</li><li>Connect to what students already know</li><li>Compare the example and non-example</li><li>Students say it in their own words</li></ul></div>
+          <div><span class="k">During</span><b>Refer back</b><ul><li>Questions tied to the criteria</li><li>Feedback using the criteria</li><li>Self and peer feedback</li></ul></div>
+          <div><span class="k">Close</span><b>Summarise</b><ul><li>Restate what we learned</li><li>Students find their place on the ladder and set a next step</li><li>Link to next lesson</li></ul></div>
+        </div>
+      </div>
+      <div class="grid2">
+        <div class="box"><h3 class="h" style="margin-bottom:10px">A feedback routine</h3><div class="fbr">
+          <div><b>I am looking for…</b><span>you to find every factor pair of 24 and show how you know none are missing.</span></div>
+          <div><b>You have…</b><span>found four pairs and drawn an array for each.</span></div>
+          <div><b>You could…</b><span>list your pairs in order from 1 to check for gaps.</span></div>
+        </div></div>
+        <div class="box"><h3 class="h" style="margin-bottom:10px">Sentence stems for self and peer feedback</h3><ul class="clean muted" style="font-size:14px">
+          <li>I have shown… by…</li><li>I am on step… of the ladder because…</li><li>You have… You could try… next.</li><li>My next step is… I'll know I've done it when…</li>
+        </ul></div>
+      </div>
+      <details class="more"><summary>Read more: is it working? A student-voice check</summary><div class="more-body">
+        <p class="muted">At the end of a lesson, ask five students two questions and score each answer from 0 to 4. Repeat in a few weeks. This gives you evidence for Monitor &amp; collect evidence and Reflect &amp; evaluate.</p>
+        <div class="table-scroll"><table class="voice">
+          <thead><tr><th>Question</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th></tr></thead>
+          <tbody>
+            <tr><th>What did you learn today?</th><td>Can't recall</td><td>Recalls but can't put it into words</td><td>Describes the activity</td><td>Repeats the learning intention</td><td>Explains the learning in their own words</td></tr>
+            <tr><th>How do you know you learned it?</th><td>Can't recall</td><td>Recalls but can't put it into words</td><td>Lists the activities</td><td>Names the success criteria</td><td>Describes feedback they used or gave a peer</td></tr>
+          </tbody>
+        </table></div>
+        <div class="tally" id="tally"></div>
+      </div></details>
+      <details class="more"><summary>Read more: whole-school routines and families</summary><div class="more-body">
+        <p>When every class shares and uses learning intentions the same way, students learn the routine once and spend their attention on the learning. Agree on a routine as a staff, then plan and rehearse it together before taking it into classrooms. Section 8 has rehearsal prompts.</p>
+        <div class="fw-quote"><q>Value parents and carers as the first and continuing educators.</q><cite>FAITH, LEARNING &amp; WELLBEING FRAMEWORK · AGENCY</cite></div>
+        <p>Share the learning focus with families so they can ask "What did you learn?" rather than "What did you do?"</p>
+      </div></details>
+      <div class="reflect" data-key="r-3"><span class="k"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>Reflect</span><label for="r-3">Where in your lessons do learning intentions most often drop out of sight? Which move will you try first?</label><textarea id="r-3"></textarea><span class="saved"></span></div>
+    </section>
+
+    <!-- 5 -->
+    <section class="cd-section" id="s5" data-title="Low Floor, High Ceiling Tasks" hidden>
+      <div class="sec-head"><h2 class="cd-section-title">Section 5: Low Floor, High Ceiling Tasks</h2><p class="sec-sub">One task the whole class can climb.</p></div>
+      <p class="big-idea"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 21 9-18 9 18"/><path d="M7 13h10"/></svg>One rich task that every student can start, with no limit on how far it goes.</p>
+      <div class="flips-head"><span>Key ideas</span><button class="linkbtn" type="button" data-revealall>Reveal all</button></div>
+      <div class="flips">
+        <button class="flip-card" type="button" aria-pressed="false"><span class="front">Low floor</span><span class="back">Everyone can begin, with materials, drawing or talk. No one waits to be rescued.</span></button>
+        <button class="flip-card" type="button" aria-pressed="false"><span class="front">High ceiling</span><span class="back">Many answers or pathways. "Have you found them all?" and "Does it always work?" keep it going.</span></button>
+        <button class="flip-card" type="button" aria-pressed="false"><span class="front">Enabling prompts</span><span class="back">Scaffolds that lower the floor without changing the intention or the criteria: a smaller number, materials, a sentence starter.</span></button>
+        <button class="flip-card" type="button" aria-pressed="false"><span class="front">Extending prompts</span><span class="back">Raise the ceiling in depth, not busywork. Push toward transfer: a new situation, a justification, a generalisation.</span></button>
+      </div>
+      <svg viewBox="0 0 520 300" role="img" aria-label="A room with a low floor and an open high ceiling. Four steps rise inside it: Start, Demonstrate, Apply, Transfer." class="room">
+        <line x1="30" y1="270" x2="490" y2="270" stroke="#0D2C6B" stroke-width="4"/>
+        <line x1="30" y1="34" x2="30" y2="270" stroke="#D1D2D4" stroke-width="2"/>
+        <line x1="490" y1="34" x2="490" y2="270" stroke="#D1D2D4" stroke-width="2"/>
+        <line x1="30" y1="34" x2="490" y2="34" stroke="#D1D2D4" stroke-width="2" stroke-dasharray="6 6"/>
+        <rect x="50" y="225" width="100" height="45" rx="6" fill="#E7ECF6"/>
+        <rect x="160" y="180" width="100" height="90" rx="6" fill="#E6F3F5"/>
+        <rect x="270" y="135" width="100" height="135" rx="6" fill="#FEF3E0"/>
+        <rect x="380" y="90" width="100" height="180" rx="6" fill="#F6E3EC"/>
+        <text x="100" y="253" text-anchor="middle" font-weight="900" font-size="14" fill="#0D2C6B">Start</text>
+        <text x="210" y="208" text-anchor="middle" font-weight="900" font-size="13" fill="#11606F">Demonstrate</text>
+        <text x="320" y="163" text-anchor="middle" font-weight="900" font-size="14" fill="#8A5200">Apply</text>
+        <text x="430" y="120" text-anchor="middle" font-weight="900" font-size="14" fill="#8A2350">Transfer</text>
+        <path d="M430 82 L430 48" stroke="#FBAF3F" stroke-width="3" fill="none" marker-end="url(#ah)"/>
+        <defs><marker id="ah" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="#FBAF3F"/></marker></defs>
+        <text x="260" y="24" text-anchor="middle" font-size="12" fill="#4C4C4E" letter-spacing="1.5">HIGH CEILING · NO CAP ON THINKING</text>
+        <text x="260" y="292" text-anchor="middle" font-size="12" fill="#4C4C4E" letter-spacing="1.5">LOW FLOOR · EVERYONE CAN BEGIN</text>
+      </svg>
+      <div class="block">
+        <h3 class="h"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M3 12h18"/></svg>Task makeover: closed to open</h3>
+        <div class="ba">
+          <div class="ba-col"><h4><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6M9 9l6 6"/></svg>Before: closed</h4><div id="baBefore" style="display:grid;gap:8px"></div></div>
+          <div class="ba-col after"><h4><svg viewBox="0 0 24 24" fill="none" stroke="#188296" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>After: low floor, high ceiling</h4><div id="baAfter" style="display:grid;gap:8px"></div></div>
+        </div>
+      </div>
+      <div class="reflect" data-key="r-4"><span class="k"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>Reflect</span><label for="r-4">Choose a closed task you use often. How could you open it up? Write one enabling and one extending prompt.</label><textarea id="r-4"></textarea><span class="saved"></span></div>
+    </section>
+
+    <!-- 6 -->
+    <section class="cd-section" id="s6" data-title="The Essential Elements" hidden>
+      <div class="sec-head"><h2 class="cd-section-title">Section 6: The Essential Elements</h2><p class="sec-sub">Definitions and beliefs from the Faith, Learning &amp; Wellbeing Framework, and what they look like in this work.</p></div>
+      <div class="el-tabs" role="tablist" id="elTabs"></div>
+      <div class="el-body" id="elBody" role="tabpanel"></div>
+      <div class="reflect" data-key="r-5"><span class="k"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>Reflect</span><label for="r-5">Which element is strongest in your planning now? Which will you focus on this term?</label><textarea id="r-5"></textarea><span class="saved"></span></div>
+    </section>
+
+    <!-- 7 -->
+    <section class="cd-section" id="s7" data-title="K–6 Examples" hidden>
+      <div class="sec-head"><h2 class="cd-section-title">Section 7: K–6 Examples</h2><p class="sec-sub">Twelve worked examples across English, Mathematics and other learning areas. Open one and move through its tabs.</p></div>
+      <div class="filters">
+        <div class="grp"><span class="lab">Stage</span>
+          <button class="fchip" type="button" data-f="stage" data-v="all" aria-pressed="true">All</button>
+          <button class="fchip" type="button" data-f="stage" data-v="ES1" aria-pressed="false">ES1</button>
+          <button class="fchip" type="button" data-f="stage" data-v="S1" aria-pressed="false">Stage 1</button>
+          <button class="fchip" type="button" data-f="stage" data-v="S2" aria-pressed="false">Stage 2</button>
+          <button class="fchip" type="button" data-f="stage" data-v="S3" aria-pressed="false">Stage 3</button>
+        </div>
+        <div class="grp"><span class="lab">Learning area</span>
+          <button class="fchip" type="button" data-f="kla" data-v="all" aria-pressed="true">All</button>
+          <button class="fchip" type="button" data-f="kla" data-v="English" aria-pressed="false">English</button>
+          <button class="fchip" type="button" data-f="kla" data-v="Mathematics" aria-pressed="false">Mathematics</button>
+          <button class="fchip" type="button" data-f="kla" data-v="Other" aria-pressed="false">Other KLAs</button>
+        </div>
+      </div>
+      <div class="ex-list" id="exList"></div>
+      <p class="note">English and Mathematics examples use the K–10 syllabuses (2022). Science and Technology, HSIE, PDHPE and Creative Arts examples use the new K–6 syllabuses (2024): 2026 is the planning year and teaching starts in 2027. Content marked "summary" is condensed; check the full wording in the syllabus.</p>
+    </section>
+
+    <!-- 8 -->
+    <section class="cd-section" id="s8" data-title="Plan &amp; Rehearse" hidden>
+      <div class="sec-head"><h2 class="cd-section-title">Section 8: Plan and Rehearse</h2><p class="sec-sub">Draft one lesson. The board display builds as you type, and the checklist shows what's still missing.</p></div>
+      <div class="planner">
+        <div class="form">
+          <span class="group-h">1 · From the syllabus</span>
+          <div class="row">
+            <label for="p-stage">Stage<select id="p-stage"><option>Early Stage 1</option><option>Stage 1</option><option selected>Stage 2</option><option>Stage 3</option></select></label>
+            <label for="p-out">Outcome code(s)<input type="text" id="p-out" placeholder="e.g. MA2-MR-01"></label>
+          </div>
+          <label for="p-content">Content point you are teaching<textarea id="p-content" style="min-height:58px" placeholder="Copy or summarise the content point"></textarea></label>
+          <span class="group-h">2 · Learning intention</span>
+          <label for="p-glob">Global learning intention (unit)<input type="text" id="p-glob"></label>
+          <label for="p-li">We are learning to… (student-friendly)<input type="text" id="p-li"></label>
+          <span class="group-h">3 · Success criteria ladder</span>
+          <p class="small muted" style="font-weight:400">Write three to five criteria and choose what each one offers. Leave a row blank if you don't need it.</p>
+          <div id="p-crit" style="display:grid;gap:8px"></div>
+          <span class="group-h">4 · Task</span>
+          <label for="p-task">Low floor, high ceiling task<textarea id="p-task"></textarea></label>
+          <div class="row">
+            <label for="p-en">Enabling prompt<input type="text" id="p-en"></label>
+            <label for="p-xt">Extending prompt<input type="text" id="p-xt"></label>
+          </div>
+          <label for="p-cfu">Check for understanding at launch<input type="text" id="p-cfu"></label>
+          <div class="out-actions"><button class="nav-btn" id="p-sample" type="button">Load a sample</button><button class="nav-btn" id="p-clear" type="button">Clear</button></div>
+        </div>
+        <div class="sticky-out">
+          <div class="display" id="p-display"></div>
+          <div class="box"><h3 class="h" style="margin-bottom:10px">Quality check</h3><div class="checks" id="p-checks"></div></div>
+          <div class="out-actions"><button class="nav-btn primary" id="p-copy" type="button">Copy plan as text</button><span class="saved" id="p-copied"></span></div>
+          <textarea id="p-fallback" hidden readonly style="min-height:160px" aria-label="Plan text to copy"></textarea>
+        </div>
+      </div>
+      <details class="more"><summary>Read more: rehearse with a colleague</summary><div class="more-body">
+        <p class="muted">Teachers are more likely to use new practice when they plan and rehearse it first, without students, and get feedback.</p>
+        <div class="rehearse">
+          <div><h4 style="margin-bottom:8px;color:var(--cd-navy)">Steps</h4><ol><li>Build your intention and ladder from the syllabus.</li><li>Plan how you'll introduce them, the vocabulary to teach and your check for understanding.</li><li>Rehearse the launch with a partner.</li><li>Refine using their feedback, then swap.</li></ol></div>
+          <div><h4 style="margin-bottom:8px;color:var(--cd-navy)">Feedback prompts</h4><ul><li>Was the intention from the syllabus and in student-friendly language?</li><li>Did the criteria build to application?</li><li>Was the link to prior learning made?</li><li>Was new vocabulary taught?</li><li>Was understanding checked before students started?</li></ul></div>
+        </div>
+      </div></details>
+    </section>
+
+    <!-- 9 -->
+    <section class="cd-section" id="s9" data-title="Mastery Checkpoint" hidden>
+      <div class="sec-head"><h2 class="cd-section-title">Section 9: Module Mastery Checkpoint</h2><p class="sec-sub">Check your understanding of the module. A score of 80% (4/5) completes this professional learning module.</p></div>
+      <form id="quizForm" style="display:grid;gap:14px"></form>
+      <div id="quizResult" hidden></div>
+      <div class="sources">
+        <b style="color:var(--cd-navy)">Sources and further reading</b>
+        <span>Catholic Education Diocese of Wollongong (2025). <i>Faith, Learning &amp; Wellbeing Framework</i>, Version 1.0.</span>
+        <span>NSW Department of Education. <a href="https://education.nsw.gov.au/teaching-and-learning/professional-learning/teacher-quality-and-accreditation/strong-start-great-teachers/refining-practice/planning-a-lesson/determining-why-and-what" target="_blank" rel="noopener">Determining why and what</a>; <a href="https://education.nsw.gov.au/teaching-and-learning/professional-learning/teacher-quality-and-accreditation/strong-start-great-teachers/refining-practice/differentiating-learning" target="_blank" rel="noopener">Differentiating learning</a>; <i>Sharing learning intentions and success criteria</i> strategy learning module and technique guides (<a href="https://education.nsw.gov.au/teaching-and-learning/curriculum/explicit-teaching/explicit-teaching-strategies/sharing-learning-intentions" target="_blank" rel="noopener">learning intentions</a>, <a href="https://education.nsw.gov.au/teaching-and-learning/curriculum/explicit-teaching/explicit-teaching-strategies/sharing-success-criteria" target="_blank" rel="noopener">success criteria</a>).</span>
+        <span>Australian Education Research Organisation (2024). <i>Explain learning objectives</i>. <a href="https://www.edresearch.edu.au" target="_blank" rel="noopener">edresearch.edu.au</a> · AITSL. <i>Learning intentions and success criteria</i>. <a href="https://www.aitsl.edu.au/feedback" target="_blank" rel="noopener">aitsl.edu.au/feedback</a></span>
+        <span>NESA syllabuses: <a href="https://curriculum.nsw.edu.au/learning-areas/english/english-k-10-2022/outcomes" target="_blank" rel="noopener">English K–10 (2022)</a>, <a href="https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-k-10-2022/outcomes" target="_blank" rel="noopener">Mathematics K–10 (2022)</a>, <a href="https://curriculum.nsw.edu.au/learning-areas/science/science-and-technology-k-6-2024/outcomes" target="_blank" rel="noopener">Science and Technology K–6 (2024)</a>, <a href="https://curriculum.nsw.edu.au/learning-areas/hsie/hsie-k-6-2024/outcomes" target="_blank" rel="noopener">HSIE K–6 (2024)</a>, <a href="https://curriculum.nsw.edu.au/learning-areas/pdhpe/pdhpe-k-6-2024/outcomes" target="_blank" rel="noopener">PDHPE K–6 (2024)</a>, <a href="https://curriculum.nsw.edu.au/learning-areas/creative-arts/creative-arts-k-6-2024/outcomes" target="_blank" rel="noopener">Creative Arts K–6 (2024)</a>.</span>
+        <span>Bransford, J. D., &amp; Johnson, M. K. (1972). <i>Journal of Verbal Learning and Verbal Behavior</i>, 11, 717–726. · Clarke, S. (2021). <i>Unlocking Learning Intentions and Success Criteria.</i> SAGE. · Tomlinson, C. A. (2006). <i>An Educator's Guide to Differentiating Instruction.</i> Cengage.</span>
+      </div>
+    </section>
+  </main>
+</div>
+
+<footer class="cd-footer">
+  <div class="cd-footer-inner">
+    <span><strong>Catholic Education Diocese of Wollongong</strong> &middot; Teaching and Learning K&ndash;6 Professional Learning</span>
+    <span>Aligned to the NSW K&ndash;6 syllabuses and the Faith, Learning &amp; Wellbeing Framework</span>
+    <span style="flex-basis:100%">&copy; Catholic Education Diocese of Wollongong 2026. For use by CEDoW staff.</span>
+  </div>
+</footer>
+</div>
+
+<script>
+(function(){
+  const store = {
+    get(k,d){ try{ const v = localStorage.getItem('itl2:'+k); return v===null?d:JSON.parse(v);}catch(e){return d;} },
+    set(k,v){ try{ localStorage.setItem('itl2:'+k, JSON.stringify(v)); return true;}catch(e){return false;} }
+  };
+  const esc = s => String(s==null?'':s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const TYPES = {s:['k1','Start'], d:['k2','Demonstrate'], sd:['k1','Start & demonstrate'], a:['k3','Apply'], t:['k4','Transfer']};
+  const ARROW_L = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>';
+  const ARROW_R = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>';
+
+  /* ---------- Section switching (one card at a time, like the Maths modules) ---------- */
+  const sections = Array.from(document.querySelectorAll('.cd-section'));
+  const nav = document.getElementById('cdNav');
+  let visited = store.get('visited', ['s1']);
+  let quizPassed = store.get('quizPassed', false);
+  nav.innerHTML = sections.map((s,i) => '<button type="button" class="cd-nav-link" data-go="'+s.id+'"><span class="cd-nav-num">'+(i+1)+'</span><span>'+s.dataset.title+'</span></button>').join('');
+  sections.forEach((s,i) => {
+    const prev = sections[i-1], next = sections[i+1];
+    const bar = document.createElement('div'); bar.className = 'sec-nav';
+    bar.innerHTML = (prev ? '<button type="button" class="nav-btn" data-go="'+prev.id+'">'+ARROW_L+'Previous</button>' : '<span></span>') +
+      (next ? '<button type="button" class="nav-btn primary" data-go="'+next.id+'">Next: '+next.dataset.title+ARROW_R+'</button>' : '');
+    s.appendChild(bar);
+  });
+  function progress(){
+    const count = visited.filter(id => id !== 's9').length + (quizPassed ? 1 : 0);
+    const shown = Math.round(count / sections.length * 100);
+    document.getElementById('progBar').style.width = shown + '%';
+    document.getElementById('progPct').textContent = shown + '%';
+    nav.querySelectorAll('.cd-nav-link').forEach(b => b.classList.toggle('is-done', visited.includes(b.dataset.go) && !b.classList.contains('is-active') && (b.dataset.go!=='s9' || quizPassed)));
+  }
+  function go(id, scroll){
+    sections.forEach(s => s.hidden = s.id !== id);
+    nav.querySelectorAll('.cd-nav-link').forEach(b => b.classList.toggle('is-active', b.dataset.go === id));
+    if(!visited.includes(id)){ visited.push(id); store.set('visited', visited); }
+    store.set('current', id);
+    progress();
+    document.body.classList.remove('cd-nav-open');
+    document.getElementById('cdNavToggle').setAttribute('aria-expanded','false');
+    if(scroll){ const el = document.getElementById(id); window.scrollTo({top: Math.max(0, el.getBoundingClientRect().top + window.scrollY - 100), behavior:'smooth'}); }
+  }
+  document.addEventListener('click', e => { const b = e.target.closest('[data-go]'); if(b){ go(b.dataset.go, true); } });
+  document.getElementById('cdNavToggle').addEventListener('click', () => {
+    const open = document.body.classList.toggle('cd-nav-open');
+    document.getElementById('cdNavToggle').setAttribute('aria-expanded', open ? 'true':'false');
+  });
+  document.getElementById('cdBackdrop').addEventListener('click', () => document.body.classList.remove('cd-nav-open'));
+  const start = (location.hash && /^#s[1-9]$/.test(location.hash)) ? location.hash.slice(1) : store.get('current','s1');
+  go(document.getElementById(start) ? start : 's1', false);
+
+  /* ---------- Flip cards ---------- */
+  document.querySelectorAll('.flip-card').forEach(c => c.addEventListener('click', () => c.setAttribute('aria-pressed', c.getAttribute('aria-pressed')==='true'?'false':'true')));
+  document.querySelectorAll('[data-revealall]').forEach(b => b.addEventListener('click', () => {
+    const cards = b.closest('.flips-head').nextElementSibling.querySelectorAll('.flip-card');
+    const open = b.textContent === 'Reveal all';
+    cards.forEach(c => c.setAttribute('aria-pressed', open?'true':'false'));
+    b.textContent = open ? 'Hide all' : 'Reveal all';
+  }));
+
+  /* ---------- Reflections ---------- */
+  document.querySelectorAll('.reflect').forEach(r => {
+    const ta = r.querySelector('textarea'), note = r.querySelector('.saved'), key = r.dataset.key;
+    ta.value = store.get(key, ''); let t;
+    ta.addEventListener('input', () => { clearTimeout(t); t = setTimeout(() => { note.textContent = store.set(key, ta.value) ? 'Saved in this browser' : 'Could not save here. Copy your notes before leaving.'; }, 400); });
+  });
+
+  /* ---------- Sorter ---------- */
+  const SORT = [
+    {q:'Make a poster about frogs', a:'Activity', fb:'This is what students do. The learning might be "to organise information for a reader".'},
+    {q:'To group related information under headings', a:'Learning intention', fb:'A transferable skill students can use in any informative text.'},
+    {q:'Our excursion to the zoo', a:'Context', fb:'The vehicle that makes the learning relevant, not the learning itself.'},
+    {q:'To compare fractions using a number line', a:'Learning intention', fb:'Specific and transferable.'},
+    {q:'Play a fraction matching game with a partner', a:'Activity', fb:'How students practise, not what they learn.'},
+    {q:'Healthy lunchboxes', a:'Context', fb:'A context that could carry many kinds of learning: data, persuasive writing, nutrition.'}
+  ];
+  const sorter = document.getElementById('sorter');
+  SORT.forEach(it => {
+    const el = document.createElement('div'); el.className = 'sort-item';
+    el.innerHTML = '<span class="q">'+esc(it.q)+'</span><div class="opts">'+['Learning intention','Activity','Context'].map(o => '<button class="opt" type="button">'+o+'</button>').join('')+'</div><span class="fb" hidden></span>';
+    el.querySelectorAll('.opt').forEach(b => b.addEventListener('click', () => {
+      el.querySelectorAll('.opt').forEach(x => x.classList.remove('right','wrong'));
+      const ok = b.textContent === it.a; b.classList.add(ok ? 'right' : 'wrong');
+      const fb = el.querySelector('.fb'); fb.hidden = false;
+      fb.textContent = (ok ? 'Yes. ' : 'Not quite. This is the ' + it.a.toLowerCase() + '. ') + it.fb;
+    }));
+    sorter.appendChild(el);
+  });
+
+  /* ---------- Task makeover ---------- */
+  const BA = [
+    {c:'What is 4 × 6?', o:'The answer is 24. What could the question be? Find as many as you can.'},
+    {c:'Write 5 sentences about your weekend.', o:'Tell a reader about one moment from your weekend so they feel they were there.'},
+    {c:'Find the perimeter of a 5 m by 3 m rectangle.', o:'A garden bed has 16 m of edging. What could it look like? Which shape gives the most space?'},
+    {c:'Label the parts of a plant.', o:'A plant on our windowsill is drooping. What might be wrong? How could we find out?'}
+  ];
+  document.getElementById('baBefore').innerHTML = BA.map(b => '<p>'+esc(b.c)+'</p>').join('');
+  document.getElementById('baAfter').innerHTML = BA.map(b => '<p>'+esc(b.o)+'</p>').join('');
+
+  /* ---------- Student voice tally ---------- */
+  (function(){
+    const box = document.getElementById('tally');
+    const Q = ['What did you learn today?','How do you know you learned it?'];
+    let data = store.get('tally', [[null,null,null,null,null],[null,null,null,null,null]]);
+    box.innerHTML = Q.map((q,qi) => '<div class="tq"><b style="color:var(--cd-navy)">'+q+'</b><div class="row">'+[0,1,2,3,4].map(si =>
+      '<label>S'+(si+1)+'<select id="tally-'+qi+'-'+si+'" data-q="'+qi+'" data-s="'+si+'"><option value="">–</option>'+[0,1,2,3,4].map(n=>'<option'+(data[qi][si]===n?' selected':'')+'>'+n+'</option>').join('')+'</select></label>').join('')+
+      '</div><span class="avg" id="avg-'+qi+'"></span></div>').join('');
+    function calc(){ data.forEach((arr,qi) => { const v = arr.filter(x => x!==null);
+      document.getElementById('avg-'+qi).innerHTML = v.length ? 'Average <strong>'+(v.reduce((a,b)=>a+b,0)/v.length).toFixed(1)+'</strong> / 4 from '+v.length+' student'+(v.length>1?'s':'') : 'Score each answer from 0 to 4'; }); }
+    box.querySelectorAll('select').forEach(sel => sel.addEventListener('change', () => { data[+sel.dataset.q][+sel.dataset.s] = sel.value==='' ? null : +sel.value; store.set('tally', data); calc(); }));
+    calc();
+  })();
+
+  /* ---------- Essential Elements (definitions and "We" statements quoted from the Framework) ---------- */
+  const ELS = [
+    {n:'Agency', c:'--agc',
+     def:'Where learners make choices, set goals, and take actions that influence their learning experiences',
+     more:'Agency exists when students take ownership of their learning, are more engaged, and have a greater sense of belonging.',
+     we:['Believe every student can be a successful learner.','Believe feedback is needed for good decision-making.','Recognise that success is a shared responsibility.'],
+     look:['Students explain the learning intention in their own words.','Students find their place on the criteria ladder and set a next step.','Students choose materials, methods or representations in the task.','Students use the criteria for self and peer feedback.']},
+    {n:'Environment', c:'--env',
+     def:'The tangible and intangible realities that enable an individual to flourish within a connected community',
+     more:'Environment is informed by the culture, physical surroundings, social interactions, safety, and context.',
+     we:['Promote a positive, optimistic learning culture.','Believe every learner has a right to feel safe.','Support flexible learning structures and conditions.'],
+     look:['The intention and ladder are displayed and referred to all lesson.','The same routine is used across the school.','Materials for every entry point are within reach.','Mistakes are treated as part of learning.']},
+    {n:'Relevance', c:'--rel',
+     def:'The connection between goals, needs, and interests of learners with real-world experiences that are meaningful and purposeful',
+     more:'Relevance aligns the personal, social, and cultural context of the learner to enhance their curiosity, engagement, motivation, and the applicability of what they experience.',
+     we:['Strive to meet students where they are.','Recognise that risk-taking is part of good learning.','Acknowledge the importance of cross disciplinary connections.'],
+     look:['Learning is connected to what students already know.','Tasks use contexts that matter to students.','Apply and Transfer criteria ask students to use learning in familiar and new situations.']},
+    {n:'Rigour', c:'--rig',
+     def:'The depth, thoroughness, and challenging nature of an educational experience',
+     more:'Rigour is inclusive of high expectations, critical and reflective thinking, problem-solving, innovation, and a deep understanding of the subject matter.',
+     we:['Accept all students need to be challenged to improve.','Have clear goals and high expectations of everyone.','Value equally knowledge, skills, mastery, and application of learning.'],
+     look:['Intentions come from syllabus outcomes and content.','Criteria build from a low floor start to transfer.','Tasks have more than one pathway and reward "How do you know?"']},
+    {n:'Equity', c:'--equ',
+     def:'The provision of inclusive, high quality educational opportunities, resources, and support to every student',
+     more:'Equity is a fundamental principle in Catholic Social Teaching. It focuses on fairness, justice, and the belief that every individual is entitled to opportunities to be successful.',
+     we:['Advocate for accessibility as everyone’s right.','Value diversity and inclusion.','Recognise the importance of using meaningful data to inform practice.'],
+     look:['One intention and one set of criteria for every student at the stage, with a starting point everyone can reach.','Scaffolds and enabling prompts vary by need.','New vocabulary is taught; sentence stems support EAL/D learners.','Knowing where students are starting from guides who gets which prompt.']}
+  ];
+  const tabs = document.getElementById('elTabs'), body = document.getElementById('elBody');
+  function showEl(i){
+    const e = ELS[i];
+    tabs.querySelectorAll('.el-tab').forEach((t,j) => t.setAttribute('aria-selected', j===i ? 'true':'false'));
+    body.style.setProperty('--c', 'var('+e.c+')');
+    body.innerHTML = '<div><p class="el-def">'+esc(e.def)+'<small>'+esc(e.more)+'</small></p><span class="el-src">Faith, Learning &amp; Wellbeing Framework</span></div>'+
+      '<div class="el-cols"><div><h4>We… (from the Framework)</h4><ul>'+e.we.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul></div>'+
+      '<div><h4>What this looks like in this module</h4><ul>'+e.look.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul></div></div>';
+  }
+  ELS.forEach((e,i) => { const t = document.createElement('button'); t.className='el-tab'; t.type='button'; t.setAttribute('role','tab'); t.textContent=e.n; t.style.setProperty('--c','var('+e.c+')'); t.addEventListener('click', () => showEl(i)); tabs.appendChild(t); });
+  showEl(0);
+
+  /* ---------- Board display ---------- */
+  function displayCard(glob, li, crit){
+    const items = crit.map(c => c && c[1] && c[1].trim() ? '<li><span class="tag '+TYPES[c[0]][0]+'">'+TYPES[c[0]][1]+'</span><span>'+esc(c[1])+'</span></li>' : '').join('');
+    return '<table><tr><th>Global learning intention</th><td>'+esc(glob||'…')+'</td></tr><tr><th>We are learning to</th><td>'+esc(li||'…')+'</td></tr><tr><th>To be successful, we will</th><td>'+(items ? '<ol>'+items+'</ol>' : '<span class="muted">Add success criteria</span>')+'</td></tr></table>';
+  }
+
+  /* ---------- Examples ---------- */
+  const EX = [
+    {stage:'ES1', yr:'K', kla:'Mathematics', title:'Ducks in the pond', code:'MAE-CSQ-02',
+     outDesc:'represents the relations between the parts that form the whole, with numbers up to 10',
+     content:'Combine groups of objects to model addition, identifying the relationship between the parts and the whole',
+     glob:'To understand how numbers are made of parts', li:'show that a number can be made from two parts',
+     task:'There are 7 ducks. Some are in the pond and some are on the grass. How many could be in the pond? How many on the grass? Find as many ways as you can.',
+     en:'Use 7 counters on a pond-and-grass mat. Move them and say what you see.', xt:'Have you found all the ways? How do you know? What if there were 8 ducks?',
+     cfu:'Show me with your fingers: 5 is 3 and how many more?',
+     sc:[['s','Count to check there are 7 altogether'],['d','Show 7 as two groups and say "4 and 3 make 7"'],['a','Find different ways to make 7 and record them'],['t','Use what I found to solve a new story with 8 ducks, and explain how I know I have every way']],
+     lens:{Agency:'Children choose to build, draw or write their ways.',Environment:'Mats and counters at every table make starting safe.',Relevance:'A simple story children can picture.',Rigour:'Every child works on part–whole thinking, up to finding every combination.',Equity:'Same question for everyone; the mat is a scaffold, not a different task.'},
+     hits:['Worked examples','Questioning','Differentiated teaching']},
+    {stage:'ES1', yr:'K', kla:'English', title:'Something that makes me happy at school', code:'ENE-CWT-01',
+     outDesc:'creates written texts that include at least 2 related ideas and correct simple sentences',
+     content:'Create written texts with related ideas using correct simple sentences', summary:true,
+     glob:'To share our ideas through writing', li:'write ideas that go together',
+     task:'After a shared reading about friendship, children draw and write about something that makes them happy at school, then read it to a partner.',
+     en:'A picture plus the sentence starter "I am happy when…" and a sound mat.', xt:'Can you add a second idea that goes with your first? Can you use "because"?',
+     cfu:'Tell your partner: what makes two ideas "go together"?',
+     sc:[['sd','Tell a partner my idea, then write it as a sentence with a capital letter and a full stop'],['a','Write a second sentence that goes with my first idea'],['t','Use the same skill to write two linked ideas about something new, like my weekend']],
+     lens:{Agency:'Children choose their topic.',Environment:'Partner sharing makes every voice heard.',Relevance:'Children write about their own experience.',Rigour:'Criteria build to linking related ideas, the heart of the outcome.',Equity:'Drawing and talk give every child a way in before writing.'},
+     hits:['Explicit teaching','Collaborative learning','Fostering student self-efficacy']},
+    {stage:'ES1', yr:'K', kla:'Science and Technology', other:true, title:'Keeping teddy dry', code:'STE-SCI-01',
+     outDesc:'identifies and describes characteristics of living things, properties of materials, and movement',
+     content:'Identify and describe properties of everyday materials', summary:true,
+     glob:'To understand that materials have different properties', li:'describe materials by how they look and feel',
+     task:'Teddy is going outside and it might rain. Which material would make the best raincoat? Test a few and decide.',
+     en:'Sort three materials using picture cards for "lets water through" and "keeps water out".', xt:'Which material would make the best umbrella? Is that the same as the best raincoat?',
+     cfu:'Thumbs up if this word describes how something feels: soft? bendy? blue?',
+     sc:[['s','Name some materials: paper, plastic, fabric, foil'],['d','Describe a material using words like hard, soft, bendy or waterproof'],['a','Test materials and sort them by whether they keep water out'],['t','Choose the best material for a different job and say why']],
+     lens:{Agency:'Children decide which material wins and why.',Environment:'Hands-on testing in small groups.',Relevance:'A real problem children understand.',Rigour:'Moves from naming to testing to choosing with a reason.',Equity:'Picture cards support children still building vocabulary.'},
+     hits:['Collaborative learning','Questioning','Explicit teaching']},
+    {stage:'S1', yr:'Yr 1–2', kla:'Mathematics', title:'Setting out chairs', code:'MA1-FG-01',
+     outDesc:'uses the structure of equal groups to solve multiplication problems, and shares or groups to solve division problems',
+     content:'Represent and explain multiplication as the combining of equal groups; distinguish between the number of rows and the number in each row',
+     glob:'To use equal groups to solve problems', li:'arrange things in equal rows and describe the groups',
+     task:'We need to set out 24 chairs for a class performance in equal rows. How could we arrange them? Find as many ways as you can.',
+     en:'Start with 12 blocks. Try rows of 2.', xt:'Why won\'t rows of 5 work? What if there were 25 chairs?',
+     cfu:'On your whiteboard, draw 3 rows of 4. How many rows? How many in each row?',
+     sc:[['s','Explain what "equal rows" means'],['d','Make an arrangement with equal rows and say "__ rows of __"'],['a','Find different arrangements for 24 chairs and record them'],['t','Use equal rows to solve a new problem and explain why some numbers of rows don\'t work']],
+     lens:{Agency:'Students choose how to build and record.',Environment:'Blocks and grid paper make thinking visible.',Relevance:'A real job in the life of the class.',Rigour:'Moves from making groups to reasoning about which work.',Equity:'A smaller starting number keeps everyone on equal groups.'},
+     hits:['Multiple exposures','Questioning','Collaborative learning']},
+    {stage:'S1', yr:'Yr 1–2', kla:'English', title:'An animal information text', code:'EN1-CWT-01',
+     outDesc:'plans, creates and revises texts written for different purposes, including paragraphs, using knowledge of vocabulary, text features and sentence structure',
+     content:'Group sentences into paragraphs that begin with a topic sentence, followed by sentences with related ideas', summary:true,
+     glob:'To write an information text for a reader', li:'organise my facts into paragraphs',
+     task:'Write an information text about an Australian animal for a younger class to read.',
+     en:'A fact bank with pictures and a planner with three headings.', xt:'Can you add a paragraph about a different part of your topic? Swap one everyday word for a scientific word.',
+     cfu:'Which of these two facts belongs under "Habitat"? Show 1 or 2 fingers.',
+     sc:[['s','Explain what a topic sentence does'],['d','Sort my facts into groups'],['a','Write a paragraph that starts with a topic sentence and has facts that belong together'],['t','Use a topic sentence to organise information in a different kind of text, like a class newsletter item']],
+     lens:{Agency:'Students choose which facts matter most for their reader.',Environment:'A real audience of younger students.',Relevance:'Students choose an animal that interests them.',Rigour:'Criteria build to independent paragraphing.',Equity:'The fact bank supports students still building decoding.'},
+     hits:['Explicit teaching','Worked examples','Feedback']},
+    {stage:'S1', yr:'Yr 1–2', kla:'HSIE: History', other:true, title:'Then and now: communication', code:'HS1-HIS-01',
+     outDesc:'describes the ancient past and changes in communication over time, using stories, images, objects and sites as evidence',
+     content:'Describe changes in communication over time using images and objects as evidence', summary:true,
+     glob:'To understand how things change over time', li:'use objects and pictures to describe how communication has changed',
+     task:'A mystery box holds a letter and stamp, a landline phone and a mobile phone. What can these objects tell us about how people communicated?',
+     en:'Picture cards with labels and a then/now sorting mat.', xt:'How might people communicate in the future? Use what you noticed to predict.',
+     cfu:'Point to the object that is the oldest. How can you tell?',
+     sc:[['s','Name ways people communicate today and in the past'],['d','Describe what an object tells us about communication in the past'],['a','Put objects in order from oldest to newest and say what changed'],['t','Use what I noticed to predict how communication might change in the future, and give a reason']],
+     lens:{Agency:'Students pose their own questions about the objects.',Environment:'Handling real objects invites curiosity.',Relevance:'Students compare with how their own families communicate.',Rigour:'Moves from describing to using objects as evidence.',Equity:'Pictures and labels give every student a way in.'},
+     hits:['Questioning','Collaborative learning','Multiple exposures']},
+    {stage:'S1', yr:'Yr 1–2', kla:'Creative Arts: Visual Arts', other:true, title:'A place that matters to me', code:'CA1-VIS-01',
+     outDesc:'makes artworks using materials and techniques to represent subject matter and ideas, and describes ways artists convey ideas in artworks',
+     content:'Use materials and techniques to represent a subject, and describe how artists convey ideas', summary:true,
+     glob:'To use art to share ideas', li:'choose materials and techniques to show an idea',
+     task:'Make an artwork of a place that matters to you. Use materials and techniques that help others feel what that place is like.',
+     en:'Choose from a tray of three materials with a technique card for each.', xt:'Look at how one artist shows a place. Try one of their techniques in your artwork.',
+     cfu:'What feeling does this colour give you? Tell your partner.',
+     sc:[['s','Name materials and techniques, such as collage, painting and drawing'],['d','Use a technique to show something in my artwork, like texture or colour'],['a','Choose materials and techniques that show my idea about my place'],['t','Describe how an artist shows an idea, and use one of their techniques in my own way']],
+     lens:{Agency:'Students choose their place and materials.',Environment:'A studio set-up where experimenting is expected.',Relevance:'Students draw on places from their own lives.',Rigour:'Moves from using techniques to making intentional choices.',Equity:'Technique cards support every student to start.'},
+     hits:['Explicit teaching','Worked examples','Fostering student self-efficacy']},
+    {stage:'S2', yr:'Yr 3–4', kla:'Mathematics', title:'The answer is 24', code:'MA2-MR-01',
+     outDesc:'represents and uses the structure of multiplicative relations to 10 × 10 to solve problems',
+     content:'Use arrays to establish multiplication facts; use number properties to find related multiplication facts',
+     glob:'To use multiplicative thinking to solve problems', li:'use arrays to find all the ways to multiply to make a number',
+     task:'The answer is 24. What could the multiplication question be? Find as many as you can and show each as an array.',
+     en:'Use square tiles. Start with 12.', xt:'Have you found them all? Which number under 50 has the most factor pairs?',
+     cfu:'Is 3 × 8 the same array as 8 × 3? Show it on your whiteboard.',
+     sc:[['s','Explain what a factor pair is'],['d','Build an array for 24 and write the fact two ways'],['a','Find all the factor pairs of 24 and show how I know none are missing'],['t','Use factor pairs to solve a new arranging problem, like 36 seedlings in rows, and justify my choice']],
+     lens:{Agency:'Students pose their own "which number has the most?" questions.',Environment:'Tiles make it safe to try and fix.',Relevance:'Arrays appear in cartons, seating and garden rows.',Rigour:'Moves from building to proving to applying.',Equity:'Tiles and a smaller start number open the door.'},
+     hits:['Questioning','Metacognitive strategies','Differentiated teaching']},
+    {stage:'S2', yr:'Yr 3–4', kla:'English', title:'A longer lunch break?', code:'EN2-CWT-03',
+     outDesc:'plans, creates and revises written texts for persuasive purposes, using text features, sentence-level grammar, punctuation and word-level language for a target audience',
+     content:'Plan and write persuasive texts with structure and language chosen for an audience', summary:true,
+     glob:'To persuade an audience', li:'back up an opinion with reasons and evidence',
+     task:'Write to the principal: should our school have a longer lunch break? Use reasons and evidence from a class survey.',
+     en:'An opinion–reason–evidence organiser and the starter "I believe… because…".', xt:'What would someone who disagrees say? How will you answer them?',
+     cfu:'Which sentence is the reason and which is the evidence? Sort these two.',
+     sc:[['s','Identify the opinion, reasons and evidence in a model text'],['d','State my opinion and give a reason'],['a','Write a paragraph that backs up a reason with evidence from our survey'],['t','Persuade a different audience, such as parents, and change my language to suit them']],
+     lens:{Agency:'Students can argue either side.',Environment:'Respectful disagreement is modelled and practised.',Relevance:'A real question and a real reader.',Rigour:'Criteria build from identifying to persuading an audience.',Equity:'The organiser supports structure for all, including EAL/D learners.'},
+     hits:['Setting goals','Explicit teaching','Feedback']},
+    {stage:'S2', yr:'Yr 3–4', kla:'PDHPE', other:true, title:'Keep the ball', code:'PH2-MSP-01',
+     outDesc:'applies movement skills, strategies and teamwork in physical activities',
+     content:'Apply movement skills and simple strategies with teammates in small-sided games', summary:true,
+     glob:'To work as a team in games', li:'use space to keep possession as a team',
+     task:'In a 3 v 1 keep-off game, how can your team keep the ball for 10 passes? Try different ideas.',
+     en:'Play 3 v 0 first, then add a defender who walks.', xt:'Make it 3 v 2. What do you need to change?',
+     cfu:'Show me where you would stand to be "open" for a pass.',
+     sc:[['s','Explain what "moving into space" means'],['d','Pass and receive with control'],['a','Move into space to get free and help my team keep the ball'],['t','Change our team\'s strategy when the defenders change theirs, and explain why']],
+     lens:{Agency:'Teams design and test their own strategies.',Environment:'Small games mean everyone is involved.',Relevance:'Skills transfer to the sports students play.',Rigour:'Moves from skills to adapting strategy under pressure.',Equity:'Easier versions keep the same learning focus.'},
+     hits:['Explicit teaching','Collaborative learning','Feedback']},
+    {stage:'S3', yr:'Yr 5–6', kla:'Mathematics', title:'Designing a garden bed', code:'MA3-2DS-02',
+     outDesc:'selects and uses the appropriate unit to calculate areas, including areas of rectangles',
+     content:'Recognise that rectangles with the same area may have different dimensions; investigate and compare the areas of rectangles that have the same perimeter',
+     glob:'To understand the relationship between perimeter and area', li:'compare the areas of rectangles that have the same perimeter',
+     task:'The school has 24 m of edging for a new garden bed. What rectangular designs are possible? Which gives the most space? Make a recommendation.',
+     en:'Use 24 cm of string or grid paper. Start with one design.', xt:'Does the pattern work for other perimeters? What if the bed is against a wall?',
+     cfu:'Two rectangles both have a perimeter of 20 m. Must they have the same area? Vote, then justify.',
+     sc:[['s','Explain the difference between perimeter and area'],['d','Draw a rectangle with a perimeter of 24 m and calculate its area'],['a','Find several designs and record their areas in a table'],['a','Compare the designs and recommend the one with the most space'],['t','Use the pattern I found to solve a new design problem, like a bed against a wall, and justify my answer']],
+     lens:{Agency:'Students make and defend a recommendation.',Environment:'Design teams share a results table.',Relevance:'A practical design problem.',Rigour:'Students generalise and justify, not just calculate.',Equity:'String and grid paper give a concrete start.'},
+     hits:['Collaborative learning','Questioning','Metacognitive strategies']},
+    {stage:'S3', yr:'Yr 5–6', kla:'English', title:'Show, don\'t tell', code:'EN3-UARL-01',
+     outDesc:'analyses representations of ideas in literature through narrative, character, imagery, symbol and connotation, and adapts these representations when creating texts',
+     content:'Analyse attributes of character and use similar attributes when creating texts',
+     glob:'To create characters that engage the reader', li:'show a character\'s feelings through actions, dialogue and imagery',
+     task:'Rewrite a key scene from our class novel so the reader knows how the main character feels without the feeling ever being named.',
+     en:'A "feelings in action" word bank and a model paragraph to annotate together.', xt:'Can an object in your scene become a symbol of the character\'s change?',
+     cfu:'Which sentence shows rather than tells: "She was angry" or "She slammed the gate"?',
+     sc:[['s','Identify where an author shows a feeling through actions or dialogue'],['d','Rewrite a "telling" sentence so it shows the feeling'],['a','Write a scene where a character\'s feelings change, shown through actions, dialogue and imagery'],['t','Use the same techniques in a new piece of my own writing and explain my choices']],
+     lens:{Agency:'Students choose the scene and the techniques.',Environment:'Peer workshops treat drafts as works in progress.',Relevance:'Students draw on their own understanding of feelings.',Rigour:'Students analyse and then adapt techniques.',Equity:'The model paragraph and word bank support every writer.'},
+     hits:['Worked examples','Feedback','Metacognitive strategies']}
+  ];
+  const ELC = {Agency:'--agc',Environment:'--env',Relevance:'--rel',Rigour:'--rig',Equity:'--equ'};
+  const stageName = {ES1:'Early Stage 1',S1:'Stage 1',S2:'Stage 2',S3:'Stage 3'};
+  const list = document.getElementById('exList');
+  list.innerHTML = EX.map((e,i) => {
+    const panes = [
+      ['Syllabus to LI', '<div class="s2s"><div class="s2s-step"><span class="s2s-n">1</span><span class="k">Outcome</span><p><span class="code">'+esc(e.code)+'</span> '+esc(e.outDesc)+'</p></div><div class="s2s-step"><span class="s2s-n">2</span><span class="k">Content'+(e.summary?' (summary)':'')+'</span><p>'+esc(e.content)+'</p></div><div class="s2s-step s2s-last"><span class="s2s-n">3</span><span class="k">Student-friendly learning intention</span><p class="s2s-li">We are learning to '+esc(e.li)+'.</p></div></div>'],
+      ['Task', '<p class="task-big">'+esc(e.task)+'</p><div class="prompts"><div class="en"><b>Enabling prompt</b>'+esc(e.en)+'</div><div class="xt"><b>Extending prompt</b>'+esc(e.xt)+'</div><div class="cf"><b>Check for understanding</b>'+esc(e.cfu)+'</div></div>'],
+      ['On the board', '<div class="display table-scroll">'+displayCard(e.glob,e.li,e.sc)+'</div>'],
+      ['Essential Elements', '<div class="lens">'+Object.keys(e.lens).map(k => '<div class="lens-row" style="--c:var('+ELC[k]+')"><b>'+k+'</b><span>'+esc(e.lens[k])+'</span></div>').join('')+'</div><div class="hits">'+e.hits.map(h=>'<span class="hit">'+esc(h)+'</span>').join('')+'</div>']
+    ];
+    return '<details class="ex" data-stage="'+e.stage+'" data-kla="'+(e.other?'Other':e.kla)+'"><summary><span class="stage-badge">'+e.stage+'<small>'+esc(e.yr)+'</small></span><span class="ex-title"><b>'+esc(e.title)+'</b><span>'+esc(e.kla)+' · '+stageName[e.stage]+' · <span class="code">'+esc(e.code)+'</span></span></span><span class="chev" aria-hidden="true">▾</span></summary>'+
+      '<div class="ex-body"><div class="ex-tabs" role="tablist">'+panes.map((p,j)=>'<button class="ex-tab" type="button" role="tab" data-ex="'+i+'" data-pane="'+j+'" aria-selected="'+(j===0)+'">'+p[0]+'</button>').join('')+'</div>'+
+      panes.map((p,j)=>'<div class="ex-pane" data-ex="'+i+'" data-pane="'+j+'"'+(j?' hidden':'')+'>'+p[1]+'</div>').join('')+'</div></details>';
+  }).join('');
+  list.querySelectorAll('.ex-tab').forEach(t => t.addEventListener('click', () => {
+    const ex = t.dataset.ex;
+    list.querySelectorAll('.ex-tab[data-ex="'+ex+'"]').forEach(x => x.setAttribute('aria-selected', x===t ? 'true':'false'));
+    list.querySelectorAll('.ex-pane[data-ex="'+ex+'"]').forEach(p => p.hidden = p.dataset.pane !== t.dataset.pane);
+  }));
+  const f = {stage:'all', kla:'all'};
+  document.querySelectorAll('.fchip').forEach(b => b.addEventListener('click', () => {
+    f[b.dataset.f] = b.dataset.v;
+    document.querySelectorAll('.fchip[data-f="'+b.dataset.f+'"]').forEach(x => x.setAttribute('aria-pressed', x===b ? 'true':'false'));
+    list.querySelectorAll('details.ex').forEach(d => { d.hidden = !((f.stage==='all'||d.dataset.stage===f.stage) && (f.kla==='all'||d.dataset.kla===f.kla)); });
+  }));
+  list.querySelector('details').open = true;
+
+  /* ---------- Planner ---------- */
+  const P = ['stage','out','content','glob','li','task','en','xt','cfu'];
+  const NC = 5;
+  const critBox = document.getElementById('p-crit');
+  critBox.innerHTML = Array.from({length:NC}, (_,i) => '<div class="row crit-row"><label for="p-ct'+i+'" class="small">Criterion '+(i+1)+'<select id="p-ct'+i+'">'+Object.keys(TYPES).map(k=>'<option value="'+k+'">'+TYPES[k][1]+'</option>').join('')+'</select></label><label for="p-cv'+i+'" class="small">I can…<input type="text" id="p-cv'+i+'"></label></div>').join('');
+  const getCrit = () => Array.from({length:NC}, (_,i) => [$('ct'+i).value, $('cv'+i).value]);
+  const setCrit = arr => { for(let i=0;i<NC;i++){ const c = (arr && arr[i]) || [['s','d','a','t','a'][i], '']; $('ct'+i).value = c[0]; $('cv'+i).value = c[1]; } };
+  const $ = id => document.getElementById('p-'+id);
+  const SAMPLE = {stage:'Stage 2', out:'MA2-MR-01', content:'Use arrays to establish multiplication facts. Use number properties to find related multiplication facts.',
+    glob:'To use multiplicative thinking to solve problems', li:'use arrays to find all the ways to multiply to make a number',
+    crit:[['s','Explain what a factor pair is'],['d','Build an array for 24 and write the fact two ways'],['a','Find all the factor pairs of 24 and show how I know none are missing'],['t','Use factor pairs to solve a new arranging problem and justify my choice']],
+    task:'The answer is 24. What could the multiplication question be? Find as many as you can and show each as an array.', en:'Use square tiles. Start with 12.', xt:'Which number under 50 has the most factor pairs?', cfu:'Is 3 × 8 the same array as 8 × 3? Show me on your whiteboard.'};
+  const fill = o => { P.forEach(k => { if(o && o[k]!==undefined) $(k).value = o[k]; }); setCrit(o && o.crit); };
+  fill(store.get('plan', null) || SAMPLE);
+  const subjRe = /\b(good|neat|nice|neatly|clear|clearly|well|detailed|interesting|great|correctly|properly)\b/i;
+  const actRe = /\b(complete|worksheet|page|poster|play|watch|colour|color)\b/i;
+  function update(){
+    const v = {}; P.forEach(k => v[k] = $(k).value); v.crit = getCrit(); store.set('plan', v);
+    const crit = v.crit.filter(c => c[1].trim());
+    document.getElementById('p-display').innerHTML = displayCard(v.glob, v.li, crit);
+    const filled = crit.length, has = t => crit.some(c => c[0]===t || (c[0]==='sd' && (t==='s'||t==='d')));
+    const checks = [
+      [v.out.trim().length>3 && v.content.trim().length>10, 'Starts from a syllabus outcome and content point'],
+      [v.li.trim().length>4 && !actRe.test(v.li), 'The learning intention names learning, not an activity'],
+      [v.li.trim().length>4 && v.li.trim().split(/\s+/).length<=16 && !/[A-Z]{2,}\d?-/.test(v.li), 'The learning intention is short, plain and free of codes'],
+      [filled>=3 && filled<=5, 'Three to five success criteria'],
+      [has('s'), 'A low floor starting point every student can reach'],
+      [has('d'), 'An opportunity to demonstrate knowledge and skills'],
+      [has('a'), 'An opportunity to apply them in a familiar situation'],
+      [has('t'), 'An opportunity to transfer them to an unfamiliar situation'],
+      [filled>0 && !subjRe.test(crit.map(c=>c[1]).join(' ')), 'Criteria describe what students do, with no subjective words like good, neat or clear'],
+      [v.task.trim().length>20 && v.en.trim().length>3 && v.xt.trim().length>3, 'One shared task with enabling and extending prompts'],
+      [v.cfu.trim().length>5, 'A check for understanding is planned for the launch']
+    ];
+    document.getElementById('p-checks').innerHTML = checks.map(c => '<div class="'+(c[0]?'ok':'')+'"><span class="ic">'+(c[0]?'✓':'')+'</span><span>'+c[1]+'</span></div>').join('');
+  }
+  P.forEach(k => $(k).addEventListener('input', update));
+  $('sample').addEventListener('click', () => { fill(SAMPLE); update(); });
+  $('clear').addEventListener('click', () => { P.forEach(k => { if(k!=='stage') $(k).value=''; }); setCrit(null); update(); });
+  critBox.addEventListener('input', update); critBox.addEventListener('change', update);
+  function planText(){
+    const v = {}; P.forEach(k => v[k] = $(k).value);
+    const crit = getCrit().filter(c => c[1].trim()).map((c,i) => '  '+(i+1)+'. ['+TYPES[c[0]][1]+'] '+c[1]).join('\n');
+    return 'LESSON PLAN: '+v.stage+(v.out?' ('+v.out+')':'')+'\nSyllabus content: '+v.content+'\n\nGlobal learning intention: '+v.glob+'\nWe are learning to: '+v.li+
+      '\n\nTo be successful, we will:\n'+crit+'\n\nTask: '+v.task+'\nEnabling prompt: '+v.en+'\nExtending prompt: '+v.xt+'\nCheck for understanding: '+v.cfu;
+  }
+  $('copy').addEventListener('click', () => {
+    const txt = planText(), note = $('copied'), fb = $('fallback');
+    const fallback = () => { fb.hidden = false; fb.value = txt; fb.focus(); fb.select(); note.textContent = 'Select all and copy the text below.'; };
+    try{ navigator.clipboard.writeText(txt).then(() => { note.textContent = 'Copied'; fb.hidden = true; }, fallback); }catch(e){ fallback(); }
+  });
+  update();
+
+  /* ---------- Mastery checkpoint ---------- */
+  const QZ = [
+    {t:'Learning intentions', q:'Where should a learning intention start?', o:['The activity you have planned for the lesson','A syllabus outcome and the content point being taught','The title of the unit or topic'], a:1, fb:'Learning intentions begin with the outcome and content, then are rewritten in student-friendly language.'},
+    {t:'Learning intentions', q:'Which is the strongest learning intention?', o:['We are learning about fractions.','We are learning to complete the fractions worksheet.','We are learning to compare fractions using a number line.'], a:2, fb:'It names transferable learning with an action verb. The others name a topic or an activity.'},
+    {t:'Success criteria', q:'Which set of opportunities should a success criteria ladder include?', o:['Three criteria that each ask for more answers or more sentences','A low floor starting point, demonstrating, applying in a familiar situation, and transferring to an unfamiliar one','Knowing and showing only, with application left as an extension task'], a:1, fb:'Whether there are three, four or five criteria, all four opportunities should be there.'},
+    {t:'Inclusion', q:'A student needs more support to reach the criteria. What is the best response?', o:['Give them a different, easier learning intention','Keep the same intention and criteria, and provide an enabling prompt or scaffold','Remove the Apply and Transfer criteria from their copy of the display'], a:1, fb:'The destination stays the same for every student at the stage; the support changes.'},
+    {t:'Tasks', q:'What makes a task low floor, high ceiling?', o:['There is one correct answer reached by one method','Separate worksheets are prepared for three ability groups','Every student can start, and many answers or pathways extend thinking'], a:2, fb:'One shared task with an accessible start and room to go further.'}
+  ];
+  const form = document.getElementById('quizForm');
+  form.innerHTML = QZ.map((x,i) => '<div class="q" id="q'+i+'"><span class="qn">Question '+(i+1)+' ('+x.t+')</span><p class="qt">'+esc(x.q)+'</p><div>'+
+    x.o.map((o,j) => '<label><input type="radio" name="q'+i+'" value="'+j+'"><span>'+String.fromCharCode(65+j)+'. '+esc(o)+'</span></label>').join('')+'</div><p class="qfb" hidden></p></div>').join('') +
+    '<div><button type="submit" class="nav-btn primary">Submit checkpoint</button></div>';
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    let score = 0;
+    QZ.forEach((x,i) => {
+      const sel = form.querySelector('input[name="q'+i+'"]:checked');
+      const box = document.getElementById('q'+i), fb = box.querySelector('.qfb');
+      const ok = sel && +sel.value === x.a; if(ok) score++;
+      box.classList.toggle('correct', !!ok); box.classList.toggle('incorrect', !ok);
+      fb.hidden = false; fb.textContent = (ok ? 'Correct. ' : (sel ? 'Not quite. ' : 'No answer. ')) + x.fb;
+    });
+    const pass = score >= 4;
+    const r = document.getElementById('quizResult'); r.hidden = false;
+    r.className = 'result ' + (pass ? 'pass' : 'fail');
+    r.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+(pass?'<circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/>':'<circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/>')+'</svg><span>'+
+      (pass ? 'You scored '+score+'/5. Module complete.' : 'You scored '+score+'/5. Review the feedback above and try again. 4/5 completes the module.')+'</span>';
+    if(pass){ quizPassed = true; store.set('quizPassed', true); progress(); }
+    r.scrollIntoView({behavior:'smooth', block:'nearest'});
+  });
+})();
+</script>
