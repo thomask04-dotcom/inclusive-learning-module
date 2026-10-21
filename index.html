@@ -1,5 +1,6 @@
 <title>Inclusive Teaching and Learning</title>
 <meta name="claude:viewport-fit-sides" content="cover">
+<meta name="robots" content="noindex, nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,400&display=swap">
@@ -207,6 +208,19 @@ textarea:focus,input:focus,select:focus{outline:2px solid var(--cd-aqua);outline
 .tag{display:inline-block;font-size:11px;font-weight:900;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:999px;white-space:nowrap}
 .tag.k1{background:var(--r1);color:var(--r1-ink)} .tag.k2{background:var(--r2);color:var(--r2-ink)} .tag.k3{background:var(--r3);color:var(--r3-ink)} .tag.k4{background:var(--r4);color:var(--r4-ink)}
 .table-scroll{overflow-x:auto}
+
+/* Try it */
+.try{border:1px solid var(--cd-silver);border-top:5px solid var(--cd-gold);border-radius:12px;padding:20px;display:grid;gap:14px;background:var(--cd-white)}
+.try-step{display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;align-items:start}
+.try-step > div{display:grid;gap:8px}
+.try-n{width:26px;height:26px;border-radius:50%;background:var(--cd-navy);color:var(--cd-white);font-weight:900;display:grid;place-items:center;font-size:13px}
+.passage{background:var(--cd-light);border-left:4px solid var(--cd-aqua);padding:14px 16px;border-radius:0 10px 10px 0;font-size:15px;line-height:1.75}
+.rate{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.rate button{width:40px;height:40px;border-radius:8px;border:1px solid var(--cd-silver);background:var(--cd-white);font-weight:900;color:var(--cd-navy)}
+.rate button[aria-pressed="true"]{background:var(--cd-navy);border-color:var(--cd-navy);color:var(--cd-white)}
+.topic{font-size:17px;color:var(--cd-navy);background:var(--cd-aqua-soft);padding:10px 14px;border-radius:8px}
+.try-why{background:var(--cd-gold-soft);border:1px solid #F5D9A8;border-radius:10px;padding:16px 18px;display:grid;gap:8px}
+.try-why > b{color:#8A5200;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
 
 /* Lesson flow etc */
 .flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
@@ -544,10 +558,31 @@ details[open] .chev{transform:rotate(180deg)}
       <p class="big-idea"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Share them early. Check students understand them. Come back to them all lesson.</p>
       <div class="flips-head"><span>Key ideas</span><button class="linkbtn" type="button" data-revealall>Reveal all</button></div>
       <div class="flips">
-        <button class="flip-card" type="button" aria-pressed="false"><span class="front">Why share early?</span><span class="back">In a well-known study, people told a passage was about doing laundry <i>before</i> hearing it recalled about twice as much as those told afterwards (Bransford &amp; Johnson, 1972). Knowing the goal gives new learning somewhere to attach.</span></button>
+        <button class="flip-card" type="button" aria-pressed="false"><span class="front">Why share early?</span><span class="back">Knowing the goal first gives new learning somewhere to attach. Try the activity below to feel the difference.</span></button>
         <button class="flip-card" type="button" aria-pressed="false"><span class="front">How do I know they understand it?</span><span class="back">Ask them to say it in their own words to a partner. Teach any new terms. Check with a quick question before they start.</span></button>
         <button class="flip-card" type="button" aria-pressed="false"><span class="front">When do I come back to it?</span><span class="back">In questions, in feedback, before removing scaffolds or starting independent work, and in the lesson summary.</span></button>
         <button class="flip-card" type="button" aria-pressed="false"><span class="front">What about open tasks?</span><span class="back">You can let students explore first. Frame the context and question, then name the intention before they work independently.</span></button>
+      </div>
+      <div class="try" id="tryIt">
+        <h3 class="h"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg>Try it: why share early?</h3>
+        <div class="try-step"><span class="try-n">1</span><div><b>Read this passage once.</b>
+          <p class="passage">First, decide how many you need, because it is easy to end up with far too many. Gather everything before you begin, as stopping halfway makes a mess. Make a small space for each one, not too deep and not too close to the next. Cover them gently, then add water, but not so much that everything floats away. After that there is nothing to do but wait. Some won't work out, and that is normal. In a few weeks, if all goes well, you will forget how small they were to begin with.</p></div></div>
+        <div class="try-step"><span class="try-n">2</span><div><b>How much did that make sense?</b>
+          <div class="rate" id="rateBtns" role="group" aria-label="Rate how much it made sense, 1 to 5"><button type="button" data-r="1">1</button><button type="button" data-r="2">2</button><button type="button" data-r="3">3</button><button type="button" data-r="4">4</button><button type="button" data-r="5">5</button><span class="small muted">1 = not at all · 5 = completely</span></div></div></div>
+        <div class="try-step"><span class="try-n">3</span><div><b>Now find out what it was about, and read it again.</b>
+          <div><button type="button" class="nav-btn primary" id="revealTopic">Reveal the topic</button></div>
+          <p class="topic" id="topicText" hidden>It's about <strong>planting seeds</strong>.</p></div></div>
+        <div class="try-why" id="tryWhy" hidden>
+          <b>What just happened</b>
+          <ul class="clean">
+            <li>Without the topic, every sentence was hard work. With it, the passage makes sense straight away.</li>
+            <li>In the original study (Bransford &amp; Johnson, 1972), people told the topic <i>before</i> reading remembered about twice as much.</li>
+            <li>Being told <i>afterwards</i> didn't help. The frame has to come first.</li>
+            <li>A learning intention is that frame. It gives new learning somewhere to attach.</li>
+            <li><b>So:</b> share it early, especially when the learning is new or complex.</li>
+          </ul>
+          <p class="small muted">Passage written for this module, based on the design of Bransford &amp; Johnson's study.</p>
+        </div>
       </div>
       <div class="block">
         <h3 class="h"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>Across the lesson</h3>
@@ -773,6 +808,16 @@ details[open] .chev{transform:rotate(180deg)}
   document.getElementById('cdBackdrop').addEventListener('click', () => document.body.classList.remove('cd-nav-open'));
   const start = (location.hash && /^#s[1-9]$/.test(location.hash)) ? location.hash.slice(1) : store.get('current','s1');
   go(document.getElementById(start) ? start : 's1', false);
+
+  /* ---------- Try it: why share early ---------- */
+  document.querySelectorAll('#rateBtns button').forEach(b => b.addEventListener('click', () => {
+    document.querySelectorAll('#rateBtns button').forEach(x => x.setAttribute('aria-pressed', x===b ? 'true':'false'));
+  }));
+  document.getElementById('revealTopic').addEventListener('click', e => {
+    document.getElementById('topicText').hidden = false;
+    document.getElementById('tryWhy').hidden = false;
+    e.currentTarget.hidden = true;
+  });
 
   /* ---------- Flip cards ---------- */
   document.querySelectorAll('.flip-card').forEach(c => c.addEventListener('click', () => c.setAttribute('aria-pressed', c.getAttribute('aria-pressed')==='true'?'false':'true')));
